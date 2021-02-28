@@ -1,5 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import * as path from 'path';
 
 export class App {
   public app: express.Application;
@@ -15,6 +16,8 @@ export class App {
 
   private initializeMiddlewares() {
     this.app.use(bodyParser.json());
+    this.app.use(express.static(path.join(__dirname, '/../web-app')));
+
   }
 
   private initializeControllers(controllers: Array<any>) {

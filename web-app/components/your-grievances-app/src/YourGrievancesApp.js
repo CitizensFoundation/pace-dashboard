@@ -113,7 +113,7 @@ export class YourGrievancesApp extends LitElement {
   render() {
     return html`
         <div class="paceImage">
-          <img width="151" height="95" src="http://popandce.eu/wp-content/uploads/2019/07/pace_logo-21.png"/>
+          <img width="151" height="95" src="images/pacelogo.png"/>
         </div>
       <header ?hidden="${this.currentGrievance}">
         <mwc-tab-bar @MDCTabBar:activated="${this._tabSelected}">

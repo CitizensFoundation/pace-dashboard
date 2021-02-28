@@ -17,6 +17,16 @@ export class App {
   private initializeMiddlewares() {
     this.app.use(bodyParser.json());
     this.app.use(express.static(path.join(__dirname, '/../web-app/dist')));
+
+    if (this.app.get('env') !== 'development' && !process.env.DISABLE_FORCE_HTTPS) {
+      this.app.use(function checkProtocol (req, res, next) {
+        if (!/https/.test(req.protocol)) {
+          res.redirect("https://" + req.headers.host + req.url);
+        } else {
+          return next();
+        }
+      });
+    }
   }
 
   private initializeControllers(controllers: Array<any>) {

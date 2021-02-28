@@ -16,8 +16,7 @@ export class App {
 
   private initializeMiddlewares() {
     this.app.use(bodyParser.json());
-    this.app.use(express.static(path.join(__dirname, '/../web-app')));
-
+    this.app.use(express.static(path.join(__dirname, '/../web-app/dist')));
   }
 
   private initializeControllers(controllers: Array<any>) {

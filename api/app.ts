@@ -7,7 +7,7 @@ export class App {
 
   constructor(controllers: Array<any>, port: number) {
     this.app = express();
-    this.port = port;
+    this.port =  parseInt(process.env.PORT || "8000");
 
     this.initializeMiddlewares();
     this.initializeControllers(controllers);

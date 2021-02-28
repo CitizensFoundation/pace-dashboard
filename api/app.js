@@ -9,7 +9,7 @@ const body_parser_1 = __importDefault(require("body-parser"));
 class App {
     constructor(controllers, port) {
         this.app = express_1.default();
-        this.port = port;
+        this.port = parseInt(process.env.PORT || "8000");
         this.initializeMiddlewares();
         this.initializeControllers(controllers);
     }

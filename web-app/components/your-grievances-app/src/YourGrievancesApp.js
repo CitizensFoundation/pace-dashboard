@@ -117,7 +117,7 @@ export class YourGrievancesApp extends LitElement {
         </div>
       <header ?hidden="${this.currentGrievance}">
         <mwc-tab-bar @MDCTabBar:activated="${this._tabSelected}">
-          <mwc-tab label="List of grievances" icon="accessibility" stacked></mwc-tab>
+          <mwc-tab label="Topics" icon="accessibility" stacked></mwc-tab>
           <mwc-tab label="Trends" icon="bar_chart" stacked></mwc-tab>
           <mwc-tab label="Connections" icon="blur_on" stacked></mwc-tab>
         </mwc-tab-bar>

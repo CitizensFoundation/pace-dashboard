@@ -27,7 +27,7 @@ self.addEventListener('message', (event) => {
 self.__precacheManifest = [
   {
     "url": "index.html",
-    "revision": "b223212008b5260862f790be75e02dda"
+    "revision": "fccf234e332ae30d9beef42137cf18ff"
   },
   {
     "url": "polyfills/custom-elements-es5-adapter.84b300ee818dce8b351c7cc7c100bcf7.js",
@@ -42,8 +42,8 @@ self.__precacheManifest = [
     "revision": "b1db7cb76380495a55ff4f65a9648f0e"
   },
   {
-    "url": "your-grievances-app-6a70ea43.js",
-    "revision": "559cbb99cc695573b506b089317855d6"
+    "url": "your-grievances-app-e7660a1a.js",
+    "revision": "7c1fa61096e4602df7cf5a1b00c070c5"
   }
 ].concat(self.__precacheManifest || []);
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});

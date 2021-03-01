@@ -57,7 +57,7 @@ export class PageTrends extends LitElement {
       options: {
         title: {
           display: true,
-          text: 'Trends (in millions)'
+          text: 'Trends'
         }
       }
     })

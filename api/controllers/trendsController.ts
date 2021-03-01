@@ -1,9 +1,11 @@
-import express from 'express';
+import express from "express";
 //import Post from './post.interface';
+const { Client } = require("@elastic/elasticsearch");
 
 export class TrendsController {
-  public path = '/api/trends';
+  public path = "/api/trends";
   public router = express.Router();
+  public esClient: typeof Client;
 
   /*private posts: Post[] = [
     {
@@ -18,17 +20,68 @@ export class TrendsController {
   }
 
   public intializeRoutes() {
-//    this.router.get(this.path, this.getAllPosts);
-//    this.router.post(this.path, this.createAPost);
+    this.router.get(this.path + "/getTopicTrends", this.getTopicTrends);
+    //    this.router.post(this.path, this.createAPost);
   }
 
-  getAllPosts = (request: express.Request, response: express.Response) => {
-//    response.send(this.posts);
+  public setEsClient(esClient: typeof Client) {
+    this.esClient = esClient;
   }
+
+  getTopicTrends = async (
+    request: express.Request,
+    response: express.Response
+  ) => {
+    const body: any = {
+      aggs: {
+        "2": {
+          date_histogram: {
+            field: "createdAt",
+            calendar_interval: "1y",
+            time_zone: "Atlantic/Reykjavik",
+            min_doc_count: 1,
+          },
+        },
+      },
+      size: 0,
+      stored_fields: ["*"],
+      script_fields: {},
+      docvalue_fields: [{ field: "createdAt", format: "date_time" }],
+      _source: { excludes: [] },
+      query: {
+        bool: {
+          must: [],
+          filter: [
+            { match_all: {} },
+            { match_phrase: { topic: request.query.topic } },
+            {
+              range: {
+                createdAt: {
+                  gte: "2006-03-01T01:57:35.660Z",
+                  lte: "2021-03-01T01:57:35.660Z",
+                  format: "strict_date_optional_time",
+                },
+              },
+            },
+          ],
+          should: [],
+          must_not: [],
+        },
+      },
+    };
+
+    const result = await this.esClient.search({
+      index: "urls",
+      body: body,
+    });
+
+    response.send(result.body.aggregations["2"].buckets);
+    console.log(result);
+  };
 
   createAPost = (request: express.Request, response: express.Response) => {
-//    const post: Post = request.body;
-//    this.posts.push(post);
-//    response.send(post);
-  }
+    //    const post: Post = request.body;
+    //    this.posts.push(post);
+    //    response.send(post);
+  };
 }

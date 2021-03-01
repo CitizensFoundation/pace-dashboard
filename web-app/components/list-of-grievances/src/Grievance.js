@@ -5,6 +5,7 @@ import { BaseElement } from '../../your-grievances-app/src/baseElement.js';
 import '@material/mwc-textarea';
 import '@material/mwc-icon';
 import { FlexLayout } from '../../your-grievances-app/src/flex-layout.js';
+import { Data, DataLabels } from '../../your-grievances-app/src/data.js';
 
 export class Grievance extends BaseElement {
   static get styles() {
@@ -17,6 +18,7 @@ export class Grievance extends BaseElement {
           background-color: #FFF;
           margin-bottom: 16px;
         }
+
         .mdc-card {
           max-width: 850px;
           padding: 16px;
@@ -79,7 +81,8 @@ export class Grievance extends BaseElement {
   static get properties() {
     return {
       grievanceData: { type: Object },
-      fullView: { type: Boolean }
+      fullView: { type: Boolean },
+      responses: { type: Array }
     };
   }
 
@@ -92,12 +95,12 @@ export class Grievance extends BaseElement {
             <h2 class="mdc-typography--title contentTitle">${this.grievanceData.title}</h2>
             <div class="mdc-typography--body1 subtext contentText">${this.grievanceData.description}</div>
           </div>
+          <canvas id="line-chart" width="800" height="350"></canvas>
           <mdc-ripple></mdc-ripple>
         </div>
         ${ this.fullView ? html`
           <div class="laysout vertical">
-            <mwc-icon icon="close" @click="${()=>{this.fire('close-grievance')}}"></mwc-icon>
-            <div class="quote">"${this.grievanceData.quote}"</div>
+            <mwc-icon icon="exit" @click="${()=>{this.fire('close-grievance')}}"></mwc-icon>
             <div class="group-spsaced layout horizontal center-center" style="margin-left:auto;margin-right:auto;width:100%;margin-top:16px;">
               <div style="width: 300px;margin-left:32px;margin-right: 174px; ">
                 <mwc-textarea outlined="" label="Your story"
@@ -126,6 +129,57 @@ export class Grievance extends BaseElement {
   _openGrievance() {
     if (!this.fullView) {
       this.fire("open-grievance", this.grievanceData);
+      this._getAndSetupChart();
+    }
+  }
+
+  firstUpdated() {
+    super.firstUpdated();
+    const lineChartElement = this.shadowRoot.getElementById("line-chart");
+
+    fetch(`/api/trends/getTopicTrends?topic=${this.grievanceData.topicName}`, {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    }).then( response => response.json()).
+    then( (responses) => {
+      this.responses = responses;
+      const yearLabels = [];
+      const counts = [];
+
+      for (let i=0;i<responses.length;i++) {
+        yearLabels.push(responses[i].key_as_string.split("-")[0]);
+        const docCount = responses[i].doc_count;
+        counts.push(docCount)
+      }
+
+      new Chart(lineChartElement, {
+        type: 'line',
+        data: {
+          labels: yearLabels,
+          datasets: [{
+            data: counts,
+            label: this.grievanceData.topicName,
+            borderColor: this.grievanceData.dataSet.borderColor,
+            fill: false
+          }]
+        },
+        options: {
+          title: {
+            display: false,
+            text: 'Trends'
+          }
+        }
+      })
+    });
+  }
+
+  updated(changedProps) {
+    super.updated(changedProps);
+    if (changedProps.has('responses')) {
+      setTimeout(()=>{
+        //this._setupChart();
+      }, 200)
     }
   }
 }

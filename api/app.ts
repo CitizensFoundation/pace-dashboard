@@ -13,7 +13,7 @@ export class App {
     this.app = express();
     this.port =  parseInt(process.env.PORT || "8000");
 
-    if (this.app.get('env') !== 'development') {
+    if (process.env.NODE_ENV!== 'development') {
       this.esClient = new Client({ node: 'http://localhost:9200' })
     } else if (process.env.QUOTAGUARD_URL) {
       this.esClient = new Client({

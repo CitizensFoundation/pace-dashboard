@@ -95,7 +95,7 @@ export class Grievance extends BaseElement {
             <h2 class="mdc-typography--title contentTitle">${this.grievanceData.title}</h2>
             <div class="mdc-typography--body1 subtext contentText">${this.grievanceData.description}</div>
           </div>
-          <canvas id="line-chart" width="800" height="350"></canvas>
+          <canvas id="line-chart" width="800" height="200"></canvas>
           <mdc-ripple></mdc-ripple>
         </div>
         ${ this.fullView ? html`
@@ -168,6 +168,13 @@ export class Grievance extends BaseElement {
           title: {
             display: false,
             text: 'Trends'
+          },
+          scales: {
+            yAxes: [{
+              ticks: {
+                 display: false //this will remove the label/text
+              }
+            }]
           }
         }
       })

@@ -14,7 +14,10 @@ export class App {
     this.port =  parseInt(process.env.PORT || "8000");
 
     if (process.env.NODE_ENV=== 'development') {
-      this.esClient = new Client({ node: 'http://localhost:9200' })
+      this.esClient = new Client({
+        node: 'https://search-pace-dev-1-jv4lkhrngfqvb3wiwkrcvpsr7m.us-east-1.es.amazonaws.com'
+      })
+//      this.esClient = new Client({ node: 'http://localhost:9200' })
     } else if (process.env.QUOTAGUARDSTATIC_URL) {
       this.esClient = new Client({
         node: 'https://search-pace-dev-1-jv4lkhrngfqvb3wiwkrcvpsr7m.us-east-1.es.amazonaws.com',

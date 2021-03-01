@@ -1,5 +1,5 @@
 import { LitElement, html, css } from 'lit-element';
-import '../../your-grievances-app/src/shadow-styles.js'
+import '../../your-grievances-app/src/shadow-styles.js';
 import { ShadowStyles } from '../../your-grievances-app/src/shadow-styles.js';
 import { BaseElement } from '../../your-grievances-app/src/baseElement.js';
 import '@material/mwc-textarea';
@@ -14,8 +14,8 @@ export class Grievance extends BaseElement {
       ShadowStyles,
       css`
         :host {
-          display: inline-block;
-          background-color: #FFF;
+          display: block;
+          background-color: #fff;
           margin-bottom: 16px;
         }
 
@@ -43,7 +43,7 @@ export class Grievance extends BaseElement {
           width: 300px;
         }
 
-        mwc-icon  {
+        mwc-icon {
           position: absolute;
           right: 16px;
           top: 16px;
@@ -74,6 +74,18 @@ export class Grievance extends BaseElement {
         mwc-textarea {
           line-height: 1;
         }
+
+        .quoteHeader {
+          padding: 16px;
+          margin-top: 8px;
+          margin-bottom: 8px;
+          background-color: #f0f0f0;
+        }
+
+        .quoteParagraph {
+          font-size: 14px;
+          padding: 16px;
+        }
       `,
     ];
   }
@@ -82,7 +94,8 @@ export class Grievance extends BaseElement {
     return {
       grievanceData: { type: Object },
       fullView: { type: Boolean },
-      responses: { type: Array }
+      responses: { type: Array },
+      topicQuotes: { type: Array },
     };
   }
 
@@ -93,102 +106,167 @@ export class Grievance extends BaseElement {
           <div class="mdc-card__media mdc-card__media--16-9 my-media"></div>
           <div class="content">
             <h2 class="mdc-typography--title contentTitle">${this.grievanceData.title}</h2>
-            <div class="mdc-typography--body1 subtext contentText">${this.grievanceData.description}</div>
-          </div>
-          <canvas id="line-chart" width="800" height="200"></canvas>
-          <mdc-ripple></mdc-ripple>
-        </div>
-        ${ this.fullView ? html`
-          <div class="laysout vertical">
-            <mwc-icon icon="exit" @click="${()=>{this.fire('close-grievance')}}"></mwc-icon>
-            <div class="group-spsaced layout horizontal center-center" style="margin-left:auto;margin-right:auto;width:100%;margin-top:16px;">
-              <div style="width: 300px;margin-left:32px;margin-right: 174px; ">
-                <mwc-textarea outlined="" label="Your story"
-                    helper="Share your story anonymously" helperpersistent=""
-                    maxlength="500"
-                    charcounter="">
-                </mwc-textarea>
-                <mwc-button raised="" label="Add story"></mwc-button>
-              </div>
-              <div class="flex"></div>
-              <div style="width: 300px">
-                <mwc-textarea outlined="" label="Solution?"
-                    helper="Can you think of a solution for the grievance" helperpersistent=""
-                    maxlength="500"
-                    charcounter="">
-                </mwc-textarea>
-                <mwc-button raised="" label="Add solution"></mwc-button>
-              </div>
+            <div class="mdc-typography--body1 subtext contentText">
+              ${this.grievanceData.description}
             </div>
           </div>
-        ` : null}
+          <canvas id="line-chart" width="800" height="200"></canvas>
+          ${ this.topicQuotes ? html`
+            <div class="layout-inline vertical center-center">
+              ${ this.topicQuotes.map( quote => {
+              return html`
+                <div class="quoteHeader">${quote.year}</div>
+                <div class="quoteParagraph">${quote.paragraph}</div>
+              `
+              })}
+            </div>` : html`` }
+          <mdc-ripple></mdc-ripple>
+        </div>
+        ${this.fullView
+          ? html`
+              <div class="laysout vertical">
+                <mwc-icon
+                  icon="exit"
+                  @click="${() => {
+                    this.fire('close-grievance');
+                  }}"
+                ></mwc-icon>
+                <div
+                  class="group-spsaced layout horizontal center-center"
+                  style="margin-left:auto;margin-right:auto;width:100%;margin-top:16px;"
+                >
+                  <div style="width: 300px;margin-left:32px;margin-right: 174px; ">
+                    <mwc-textarea
+                      outlined=""
+                      label="Your story"
+                      helper="Share your story anonymously"
+                      helperpersistent=""
+                      maxlength="500"
+                      charcounter=""
+                    >
+                    </mwc-textarea>
+                    <mwc-button raised="" label="Add story"></mwc-button>
+                  </div>
+                  <div class="flex"></div>
+                  <div style="width: 300px">
+                    <mwc-textarea
+                      outlined=""
+                      label="Solution?"
+                      helper="Can you think of a solution for the grievance"
+                      helperpersistent=""
+                      maxlength="500"
+                      charcounter=""
+                    >
+                    </mwc-textarea>
+                    <mwc-button raised="" label="Add solution"></mwc-button>
+                  </div>
+                </div>
+              </div>
+            `
+          : null}
       </div>
     `;
   }
 
   _openGrievance() {
     if (!this.fullView) {
-      this.fire("open-grievance", this.grievanceData);
-      this._getAndSetupChart();
+      this.fire('open-grievance', this.grievanceData);
     }
   }
 
   firstUpdated() {
     super.firstUpdated();
-    const lineChartElement = this.shadowRoot.getElementById("line-chart");
+    const lineChartElement = this.shadowRoot.getElementById('line-chart');
 
     fetch(`/api/trends/getTopicTrends?topic=${this.grievanceData.topicName}`, {
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
-    }).then( response => response.json()).
-    then( (responses) => {
-      response.shift();
-      this.responses = responses;
-      const yearLabels = [];
-      const counts = [];
+    })
+      .then(response => response.json())
+      .then(responses => {
+        responses.shift();
+        this.responses = responses;
+        const yearLabels = [];
+        const counts = [];
 
-      for (let i=0;i<responses.length;i++) {
-        yearLabels.push(responses[i].key_as_string.split("-")[0]);
-        const docCount = responses[i].doc_count;
-        counts.push(docCount)
-      }
-
-      new Chart(lineChartElement, {
-        type: 'line',
-        data: {
-          labels: yearLabels,
-          datasets: [{
-            data: counts,
-            label: this.grievanceData.topicName,
-            borderColor: this.grievanceData.dataSet.borderColor,
-            fill: false
-          }]
-        },
-        options: {
-          title: {
-            display: false,
-            text: 'Trends'
-          },
-          scales: {
-            yAxes: [{
-              ticks: {
-                 display: false //this will remove the label/text
-              }
-            }]
-          }
+        for (let i = 0; i < responses.length; i++) {
+          yearLabels.push(responses[i].key_as_string.split('-')[0]);
+          const docCount = responses[i].doc_count;
+          counts.push(docCount);
         }
+
+        new Chart(lineChartElement, {
+          type: 'line',
+          data: {
+            labels: yearLabels,
+            datasets: [
+              {
+                data: counts,
+                label: this.grievanceData.topicName,
+                borderColor: this.grievanceData.dataSet.borderColor,
+                fill: false,
+              },
+            ],
+          },
+          options: {
+            title: {
+              display: false,
+              text: 'Trends',
+            },
+            scales: {
+              yAxes: [
+                {
+                  ticks: {
+                    display: false, //this will remove the label/text
+                  },
+                },
+              ],
+            },
+          },
+        });
+      });
+
+    if (this.fullView) {
+      fetch(`/api/trends/getTopicQuotes?topic=${this.grievanceData.topicName}`, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
       })
-    });
+        .then(response => response.json())
+        .then(topicQuotes => {
+          const years = {
+            "2013": "No data yet",
+            "2014": "No data yet",
+            "2015": "No data yet",
+            "2016": "No data yet",
+            "2017": "No data yet",
+            "2018": "No data yet",
+            "2019": "No data yet",
+            "2020": "No data yet"
+          }
+
+          for (let i=0;i<topicQuotes.length;i++) {
+            const yearPart = topicQuotes[i]._source.createdAt.split("-")[0];
+            years[yearPart] = topicQuotes[i]._source.paragraph;
+          }
+
+          const flatTopicQuotes = [];
+          for (const year in years) {
+            flatTopicQuotes.push({ year: year, paragraph: years[year] });
+          }
+
+          this.topicQuotes = flatTopicQuotes;
+        });
+    }
   }
 
   updated(changedProps) {
     super.updated(changedProps);
     if (changedProps.has('responses')) {
-      setTimeout(()=>{
+      setTimeout(() => {
         //this._setupChart();
-      }, 200)
+      }, 200);
     }
   }
 }
-

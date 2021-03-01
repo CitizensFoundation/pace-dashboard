@@ -50,6 +50,15 @@ class TrendsController {
                                     },
                                 },
                             },
+                            {
+                                range: {
+                                    pageRank: {
+                                        gte: 0,
+                                        lte: 10000000,
+                                        format: "strict_date_optional_time",
+                                    },
+                                },
+                            },
                         ],
                         should: [],
                         must_not: [],
@@ -70,7 +79,7 @@ class TrendsController {
             }
         };
         this.getTopicQuotes = async (request, response) => {
-            const returnQuotes = [];
+            let returnQuotes = [];
             const years = ["2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020"];
             for (let i = 0; i < years.length; i++) {
                 const year = years[i];
@@ -86,6 +95,7 @@ class TrendsController {
                                     },
                                     filter: [
                                         { match_all: {} },
+                                        { match_phrase: { topic: request.query.topic } },
                                         {
                                             range: {
                                                 createdAt: {
@@ -109,7 +119,7 @@ class TrendsController {
                         index: "urls",
                         body: body,
                     });
-                    returnQuotes.push(result.body.hits);
+                    returnQuotes = returnQuotes.concat(result.body.hits.hits);
                 }
                 catch (ex) {
                     console.error(ex);

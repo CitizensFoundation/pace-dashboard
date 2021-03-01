@@ -55,15 +55,16 @@ class App {
     initializeMiddlewares() {
         this.app.use(body_parser_1.default.json());
         this.app.use(express_1.default.static(path.join(__dirname, '/../web-app/dist')));
-        /*if (this.app.get('env') !== 'development' && !process.env.DISABLE_FORCE_HTTPS) {
-          this.app.use(function checkProtocol (req, res, next) {
-            if (!/https/.test(req.protocol)) {
-              res.redirect("https://" + req.headers.host + req.url);
-            } else {
-              return next();
-            }
-          });
-        }*/
+        if (process.env.NODE_ENV !== 'development' && !process.env.DISABLE_FORCE_HTTPS) {
+            this.app.use(function checkProtocol(req, res, next) {
+                if (!/https/.test(req.protocol)) {
+                    res.redirect("https://" + req.headers.host + req.url);
+                }
+                else {
+                    return next();
+                }
+            });
+        }
     }
     initializeControllers(controllers) {
         controllers.forEach((controller) => {

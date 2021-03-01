@@ -69,6 +69,55 @@ class TrendsController {
                 response.sendStatus(500);
             }
         };
+        this.getTopicQuotes = async (request, response) => {
+            const returnQuotes = [];
+            const years = ["2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020"];
+            for (let i = 0; i < years.length; i++) {
+                const year = years[i];
+                const body = {
+                    from: 0,
+                    size: 1,
+                    query: {
+                        function_score: {
+                            query: {
+                                bool: {
+                                    "must": {
+                                        "term": { "relevanceScore": 1 }
+                                    },
+                                    filter: [
+                                        { match_all: {} },
+                                        {
+                                            range: {
+                                                createdAt: {
+                                                    gte: `${year}-01-01T00:00:00.000Z`,
+                                                    lte: `${year}-12-31T23:59:59.990Z`,
+                                                    format: "strict_date_optional_time",
+                                                },
+                                            },
+                                        },
+                                    ],
+                                    should: [],
+                                    must_not: [],
+                                },
+                            },
+                            random_score: {},
+                        }
+                    },
+                };
+                try {
+                    const result = await this.esClient.search({
+                        index: "urls",
+                        body: body,
+                    });
+                    returnQuotes.push(result.body.hits);
+                }
+                catch (ex) {
+                    console.error(ex);
+                    response.sendStatus(500);
+                }
+            }
+            response.send(returnQuotes);
+        };
         this.createAPost = (request, response) => {
             //    const post: Post = request.body;
             //    this.posts.push(post);
@@ -78,6 +127,7 @@ class TrendsController {
     }
     intializeRoutes() {
         this.router.get(this.path + "/getTopicTrends", this.getTopicTrends);
+        this.router.get(this.path + "/getTopicQuotes", this.getTopicQuotes);
         //    this.router.post(this.path, this.createAPost);
     }
     setEsClient(esClient) {

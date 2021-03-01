@@ -36,6 +36,7 @@ export class App {
 
   private initializeMiddlewares() {
     if (process.env.NODE_ENV !== 'development' && !process.env.DISABLE_FORCE_HTTPS) {
+      this.app.enable('trust proxy');
       this.app.use(function checkProtocol (req, res, next) {
         console.log(`Protocol ${req.protocol}`)
         if (!/https/.test(req.protocol)) {

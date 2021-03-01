@@ -4,6 +4,7 @@ import { ShadowStyles } from '../../your-grievances-app/src/shadow-styles.js';
 import { BaseElement } from '../../your-grievances-app/src/baseElement.js';
 import '@material/mwc-textarea';
 import '@material/mwc-icon';
+import '@material/mwc-button';
 import '@material/mwc-linear-progress';
 import { FlexLayout } from '../../your-grievances-app/src/flex-layout.js';
 import { Data, DataLabels } from '../../your-grievances-app/src/data.js';
@@ -46,8 +47,10 @@ export class Grievance extends BaseElement {
 
         mwc-icon {
           position: absolute;
-          right: 16px;
+          left: 16px;
           top: 16px;
+          height: 96px;
+          width: 96px;
         }
 
         .contentText {
@@ -96,6 +99,10 @@ export class Grievance extends BaseElement {
           font-size: 14px;
           padding: 16px;
         }
+
+        mwc-icon {
+          color: #000;
+        }
       `,
     ];
   }
@@ -138,13 +145,12 @@ export class Grievance extends BaseElement {
         </div>
         ${this.fullView
           ? html`
+              <mwc-icon
+                @click="${() => {
+                  this.fire('close-grievance');
+                }}"
+              >close</mwc-icon>
               <div class="laysout vertical">
-                <mwc-icon
-                  icon="exit"
-                  @click="${() => {
-                    this.fire('close-grievance');
-                  }}"
-                ></mwc-icon>
                 <div
                   class="group-spsaced layout horizontal center-center"
                   style="margin-left:auto;margin-right:auto;width:100%;margin-top:16px;"

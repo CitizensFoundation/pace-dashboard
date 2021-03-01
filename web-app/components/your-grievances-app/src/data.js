@@ -146,7 +146,7 @@ export const Data = [
   {
     title: "QAnon",
     topicName: "Qanon",
-    description: "QAnon is a disproven and discredited far-right conspiracy theory alleging that a secret cabal of Satan-worshipping, cannibalistic pedophiles is running a global child sex-trafficking ring and plotted against former U.S. president Donald Trump while he was in office.[2][3][4][5] According to U.S. prosecutors, QAnon is commonly called a cult.",
+    description: "QAnon is a disproven and discredited far-right conspiracy theory alleging that a secret cabal of Satan-worshipping, cannibalistic pedophiles is running a global child sex-trafficking ring and plotted against former U.S. president Donald Trump while he was in office. According to U.S. prosecutors, QAnon is commonly called a cult.",
     dataSet: {
       borderColor: "#d82129",
     }

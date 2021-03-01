@@ -35,9 +35,6 @@ export class App {
   }
 
   private initializeMiddlewares() {
-    this.app.use(bodyParser.json());
-    this.app.use(express.static(path.join(__dirname, '/../web-app/dist')));
-
     if (process.env.NODE_ENV !== 'development' && !process.env.DISABLE_FORCE_HTTPS) {
       this.app.use(function checkProtocol (req, res, next) {
         if (!/https/.test(req.protocol)) {
@@ -47,6 +44,9 @@ export class App {
         }
       });
     }
+
+    this.app.use(bodyParser.json());
+    this.app.use(express.static(path.join(__dirname, '/../web-app/dist')));
   }
 
   private initializeControllers(controllers: Array<any>) {

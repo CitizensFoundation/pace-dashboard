@@ -68,12 +68,10 @@ export class YourGrievancesApp extends LitElement {
       }
 
       .app-footer {
-        font-size: calc(12px + 0.5vmin);
-        align-items: center;
+        margin-top: 16px;
       }
 
       .app-footer a {
-        margin-left: 5px;
       }
 
       [hidden] {
@@ -89,6 +87,11 @@ export class YourGrievancesApp extends LitElement {
         margin-top: 26px;
         margin-left: 64px;
         margin-bottom: 16px;
+      }
+
+      .euFooterText {
+        font-size: 12px;
+        margin-top: 8px;
       }
     `;
   }
@@ -127,8 +130,13 @@ export class YourGrievancesApp extends LitElement {
         ${this._renderPage()}
       </main>
 
-      <p class="app-footer">
-
+      <p class="app-footer layout vertical center-center">
+       <div>
+         <img src="images/eu.jpeg"/>
+       </div>
+       <div class="euFooterText">
+         This project has received funding from the European Union’s Horizon 2020 research and innovation programme under grant agreement No 822337. Any dissemination of results here presented reflects only the consortium’s view. The Agency is not responsible for any use that may be made of the information it contains.
+       </div>
       </p>
     `;
   }

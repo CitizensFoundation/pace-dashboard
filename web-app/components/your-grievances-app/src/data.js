@@ -74,7 +74,7 @@ export const Data = [
     dataSet: {
       data: createRandomData(DataLabels.length),
       label: "Evolving Social Mores",
-      borderColor: "#e8c3b9",
+      borderColor: "#e8c309",
       fill: false
     }
   },
@@ -126,7 +126,7 @@ export const Data = [
     dataSet: {
       data: createRandomData(DataLabels.length),
       label: "Strong Man",
-      borderColor: "#b9e8c3",
+      borderColor: "#19e8c3",
       fill: false
     }
   },

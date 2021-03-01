@@ -224,6 +224,9 @@ export class Grievance extends BaseElement {
             ],
           },
           options: {
+            tooltips:{
+              enabled:false
+            },
             title: {
               display: false,
               text: 'Trends',

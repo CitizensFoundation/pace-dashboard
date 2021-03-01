@@ -18,7 +18,7 @@ export class App {
     } else if (process.env.QUOTAGUARD_URL) {
       this.esClient = new Client({
         node: 'https://search-pace-dev-1-jv4lkhrngfqvb3wiwkrcvpsr7m.us-east-1.es.amazonaws.com',
-        proxy: url.parse(process.env.QUOTAGUARD_URL)
+        proxy: process.env.QUOTAGUARD_URL
       })
     } else  {
       this.esClient = new Client({

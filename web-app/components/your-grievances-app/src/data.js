@@ -142,5 +142,93 @@ export const Data = [
       borderColor: "#05c458",
       fill: false
     }
+  },
+  {
+    title: "QAnon",
+    topicName: "Qanon",
+    description: "QAnon is a disproven and discredited far-right conspiracy theory alleging that a secret cabal of Satan-worshipping, cannibalistic pedophiles is running a global child sex-trafficking ring and plotted against former U.S. president Donald Trump while he was in office.[2][3][4][5] According to U.S. prosecutors, QAnon is commonly called a cult.",
+    dataSet: {
+      borderColor: "#d82129",
+    }
+  },
+  {
+    title: "Distrust of Traditional Media",
+    topicName: "Distrust of media",
+    description: "With the loss of centralized broadcast authorities, in a splintered, narrow-cast media market, demonstrable effort by bad actors to commit misinformation campaigns across all platforms, despite efforts of journalists and watchdogs, the “truth” becomes up for debate.",
+    dataSet: {
+      borderColor: "#551498",
+    }
+  },
+  {
+    title: "Perceived False Accusations of Racism",
+    topicName: "False accusations of racism",
+    description: "Starkly laid bare lately in the US, European populist narratives have also been deeply ingrained in discussions of purity of blood. With anti-discrimination laws on the books, many may feel they can say they do not live in a racist society, despite constant testimony and protest from POC that they do.",
+    dataSet: {
+      borderColor: "#2594f8",
+    }
+  },
+  {
+    title: "Defiance of Pandemic Overreach: “Nanny State”",
+    topicName: "Nanny state",
+    description: "Given the core platform of the populists, “starve the beast”, “dismantle the nanny state”, 	deregulation, cancellation of social programs, it’s no surprise that when called upon to embrace collectivist policies regulating movement and mandating masks, core supporters rebelled en masse.",
+    dataSet: {
+      borderColor: "#F524f8",
+    }
+  },
+  {
+    title: "Call to Vigilante Action/Enforcement of Populist Agenda",
+    topicName: "Call to vigilante action",
+    description: "Feeling betrayed by mainstream media and popular opinion, supporters of populist causes decide to take the law into their own hands to manifest the political outcome they seek, without regard for democratic process.",
+    dataSet: {
+      borderColor: "#454458",
+    }
+  },
+  {
+    title: "Dehumanization/”Othering” of Political Opponents",
+    topicName: "Dehumanization of opponents",
+    description: "Viewing political opponents as illegitimate, or even as inhuman, invalidates the votes of those opponents and the content of their opinions, making it easier for the populist supporters to disengage from the democratic process and doubt or disregard polling outcomes.",
+    dataSet: {
+      borderColor: "#a50418",
+    }
+  },
+  {
+    title: "Restrictions on Populist “Free Speech”",
+    topicName: "Restrictions on free speech",
+    description: "Free speech forms a cornerstone of tolerant, democratic society; as such only intolerant, illiberal, anti-democratic speech represents a threat. Restrictions on populist messages that fit these criteria outraged the populist base, and turned free speech and “cancel culture” into a battleground.",
+    dataSet: {
+      borderColor: "#0524e8",
+    }
+  },
+  {
+    title: "Fear of Loss of Sovereignty",
+    topicName: "Loss of sovereignty",
+    description: "The rise of ultra-nationalistic and ethno-nationalistic sentiment originates in the perceived threat of global government or federated authority that would strip sovereign rights from traditional nation states, thus abrogating essential “freedoms” once guaranteed by those nation states.",
+    dataSet: {
+      borderColor: "#95a428",
+    }
+  },
+  {
+    title: "Resentment of Immigrant/Minority Receiving “Undeserved Support”",
+    topicName: "Undeserving support",
+    description: "Having divided their societies into “makers” and “takers”, and having decided those that disagree with them lack legitimacy, the logical next step for populist narratives moves decisively to identify recipients of State support, protection and asylum as unworthy of such aid.",
+    dataSet: {
+      borderColor: "#c56c83",
+    }
+  },
+  {
+    title: "Citizen Engagement",
+    topicName: "Citizen Engagement",
+    description: "Countervalent to all of the polarization of populist narratives, we wanted to control with a search for textual evidence of citizens of opposing viewpoints engaging with one another in tones of reasoned argumentation and mutual respect.",
+    dataSet: {
+      borderColor: "#103b64",
+    }
+  },
+  {
+    title: "Democratic Innovation",
+    topicName: "Democratic Innovation",
+    description: "As further control, we searched for textual instances of innovation, progress and engagement in democratic processes discussed, critiqued, extolled, or referenced.",
+    dataSet: {
+      borderColor: "#b63134",
+    }
   }
 ]

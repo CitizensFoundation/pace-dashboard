@@ -4,6 +4,7 @@ import { ShadowStyles } from '../../your-grievances-app/src/shadow-styles.js';
 import { BaseElement } from '../../your-grievances-app/src/baseElement.js';
 import '@material/mwc-textarea';
 import '@material/mwc-icon';
+import '@material/mwc-linear-progress';
 import { FlexLayout } from '../../your-grievances-app/src/flex-layout.js';
 import { Data, DataLabels } from '../../your-grievances-app/src/data.js';
 
@@ -120,6 +121,9 @@ export class Grievance extends BaseElement {
             </div>
           </div>
           <canvas id="line-chart" width="800" height="200"></canvas>
+          ${ (this.fullView && !this.topicQuotes) ? html`
+            <mwc-linear-progress indeterminate></mwc-linear-progress>
+          ` : html``}
           ${ this.topicQuotes ? html`
             <div class="layout-inline vertical center-center">
               <div class="quotesTitle">Random quotes</div>
@@ -259,6 +263,13 @@ export class Grievance extends BaseElement {
           for (let i=0;i<topicQuotes.length;i++) {
             const yearPart = topicQuotes[i]._source.createdAt.split("-")[0];
             years[yearPart] = topicQuotes[i]._source.paragraph;
+          }
+
+          if (false && this.grievanceData.topicName=="QAnon") {
+            years["2013"]="No data";
+            years["2014"]="No data";
+            years["2015"]="No data";
+            years["2016"]="No data";
           }
 
           const flatTopicQuotes = [];

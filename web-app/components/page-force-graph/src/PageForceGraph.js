@@ -42,7 +42,7 @@ export class PageForceGraph extends LitElement {
 
   firstUpdated() {
     super.firstUpdated();
-    const N = 300;
+    const N = 22;
     const gData = {
       nodes: [...Array(N).keys()].map(i => ({ id: i })),
       links: [...Array(N).keys()]

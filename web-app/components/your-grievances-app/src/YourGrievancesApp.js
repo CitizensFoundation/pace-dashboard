@@ -117,9 +117,9 @@ export class YourGrievancesApp extends LitElement {
         </div>
       <header ?hidden="${this.currentGrievance}">
         <mwc-tab-bar @MDCTabBar:activated="${this._tabSelected}">
-          <mwc-tab label="Topics" icon="accessibility" stacked></mwc-tab>
-          <mwc-tab label="Trends" icon="bar_chart" stacked></mwc-tab>
-          <mwc-tab label="Connections" icon="blur_on" stacked></mwc-tab>
+          <mwc-tab label="Topics" icon="bar_chart" stacked></mwc-tab>
+          <mwc-tab label="Distances" icon="blur_on" stacked></mwc-tab>
+          <mwc-tab label="Connections" icon="format_size" stacked></mwc-tab>
         </mwc-tab-bar>
       </header>
 
@@ -150,7 +150,7 @@ export class YourGrievancesApp extends LitElement {
         `;
       case '1':
         return html`
-        <page-trends></page-trends>
+            <page-force-graph></page-force-graph>
       `;
       case '2':
           return html`

@@ -56,12 +56,18 @@ class TrendsController {
                     },
                 },
             };
-            const result = await this.esClient.search({
-                index: "urls",
-                body: body,
-            });
-            response.send(result.body.aggregations["2"].buckets);
-            console.log(result);
+            try {
+                const result = await this.esClient.search({
+                    index: "urls",
+                    body: body,
+                });
+                response.send(result.body.aggregations["2"].buckets);
+                console.log(result);
+            }
+            catch (ex) {
+                console.error(ex);
+                response.sendStatus(500);
+            }
         };
         this.createAPost = (request, response) => {
             //    const post: Post = request.body;

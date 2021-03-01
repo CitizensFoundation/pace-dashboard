@@ -70,13 +70,18 @@ export class TrendsController {
       },
     };
 
-    const result = await this.esClient.search({
-      index: "urls",
-      body: body,
-    });
+    try {
+      const result = await this.esClient.search({
+        index: "urls",
+        body: body,
+      });
+      response.send(result.body.aggregations["2"].buckets);
+      console.log(result);
+    } catch (ex) {
+      console.error(ex);
+      response.sendStatus(500);
+    }
 
-    response.send(result.body.aggregations["2"].buckets);
-    console.log(result);
   };
 
   createAPost = (request: express.Request, response: express.Response) => {

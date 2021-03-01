@@ -31,7 +31,7 @@ class App {
     constructor(controllers, port) {
         this.app = express_1.default();
         this.port = parseInt(process.env.PORT || "8000");
-        if (process.env.NODE_ENV !== 'development') {
+        if (process.env.NODE_ENV === 'development') {
             this.esClient = new Client({ node: 'http://localhost:9200' });
         }
         else if (process.env.QUOTAGUARD_URL) {

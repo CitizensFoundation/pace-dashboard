@@ -75,11 +75,20 @@ export class Grievance extends BaseElement {
           line-height: 1;
         }
 
+        .quotesTitle {
+          padding: 16px;
+          margin-top: 8px;
+          margin-bottom: 8px;
+          font-size: 20px;
+          text-align: center;
+        }
+
         .quoteHeader {
           padding: 16px;
           margin-top: 8px;
           margin-bottom: 8px;
           background-color: #f0f0f0;
+          font-size: 20px;
         }
 
         .quoteParagraph {
@@ -113,6 +122,7 @@ export class Grievance extends BaseElement {
           <canvas id="line-chart" width="800" height="200"></canvas>
           ${ this.topicQuotes ? html`
             <div class="layout-inline vertical center-center">
+              <div class="quotesTitle">Random quotes</div>
               ${ this.topicQuotes.map( quote => {
               return html`
                 <div class="quoteHeader">${quote.year}</div>

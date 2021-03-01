@@ -37,6 +37,7 @@ export class App {
   private initializeMiddlewares() {
     if (process.env.NODE_ENV !== 'development' && !process.env.DISABLE_FORCE_HTTPS) {
       this.app.use(function checkProtocol (req, res, next) {
+        console.log(`Protocol ${req.protocol}`)
         if (!/https/.test(req.protocol)) {
           res.redirect("https://" + req.headers.host + req.url);
         } else {

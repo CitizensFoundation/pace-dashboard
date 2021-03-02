@@ -35,9 +35,13 @@ export class TrendsController {
   ) => {
 
     const must = [];
-
+    const mustNot = [];
     if (request.query.topic=="Left behind") {
       must.push({"match": {"subTopic": "Economics" }});
+    }
+
+    if (request.query.topic=="Resentment of elite") {
+      must.push({"match": {"subTopic": "TUD" }});
     }
 
     const body: any = {

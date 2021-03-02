@@ -19,6 +19,10 @@ class TrendsController {
         this.path = "/api/trends";
         this.router = express_1.default.Router();
         this.getTopicTrends = async (request, response) => {
+            const must = [];
+            if (request.query.topic == "Left behind") {
+                must.push({ "match": { "subTopic": "Economics" } });
+            }
             const body = {
                 aggs: {
                     "2": {
@@ -37,7 +41,7 @@ class TrendsController {
                 _source: { excludes: [] },
                 query: {
                     bool: {
-                        must: [],
+                        must: must,
                         filter: [
                             { match_all: {} },
                             { match_phrase: { topic: request.query.topic } },

@@ -33,6 +33,13 @@ export class TrendsController {
     request: express.Request,
     response: express.Response
   ) => {
+
+    const must = [];
+
+    if (request.query.topic=="Left behind") {
+      must.push({"match": {"subTopic": "Economics" }});
+    }
+
     const body: any = {
       aggs: {
         "2": {
@@ -51,7 +58,7 @@ export class TrendsController {
       _source: { excludes: [] },
       query: {
         bool: {
-          must: [],
+          must: must,
           filter: [
             { match_all: {} },
             { match_phrase: { topic: request.query.topic } },

@@ -79,8 +79,13 @@ class TrendsController {
                 must.push({ "match": { "subTopic": "Globalism" } });
             }
             if (request.query.topic == "Resentment of elite") {
-                must.push({ "match": { "subTopic": "TUD" } });
+                mustNot.push({ "match": { "subTopic": "Climate denial" } });
             }
+            /*must.push({
+              "script": {
+                "script": "doc['paragraph'].length < 100"
+              }
+            })*/
             for (let i = 0; i < years.length; i++) {
                 const year = years[i];
                 const body = {
@@ -107,14 +112,14 @@ class TrendsController {
                                             range: {
                                                 pageRank: {
                                                     gte: 0,
-                                                    lte: 10000000,
+                                                    lte: 25000000,
                                                     format: "strict_date_optional_time",
                                                 },
                                             },
                                         },
                                     ],
                                     should: [],
-                                    must_not: [],
+                                    must_not: mustNot,
                                 },
                             },
                             random_score: {},

@@ -68,7 +68,7 @@ export class TrendsController {
               range: {
                 pageRank: {
                   gte: 0,
-                  lte: 250000,
+                  lte: 2500000,
                   format: "strict_date_optional_time",
                 },
               },

@@ -19,14 +19,6 @@ class TrendsController {
         this.path = "/api/trends";
         this.router = express_1.default.Router();
         this.getTopicTrends = async (request, response) => {
-            const must = [];
-            const mustNot = [];
-            if (request.query.topic == "Left behind") {
-                must.push({ "match": { "subTopic": "Economics" } });
-            }
-            if (request.query.topic == "Resentment of elite") {
-                must.push({ "match": { "subTopic": "TUD" } });
-            }
             const body = {
                 aggs: {
                     "2": {
@@ -45,7 +37,7 @@ class TrendsController {
                 _source: { excludes: [] },
                 query: {
                     bool: {
-                        must: must,
+                        must: [],
                         filter: [
                             { match_all: {} },
                             { match_phrase: { topic: request.query.topic } },
@@ -89,6 +81,15 @@ class TrendsController {
         this.getTopicQuotes = async (request, response) => {
             let returnQuotes = [];
             const years = ["2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020"];
+            const must = [];
+            const mustNot = [];
+            must.push({ "term": { "relevanceScore": 1 } });
+            if (request.query.topic == "Left behind") {
+                must.push({ "match": { "subTopic": "Economics" } });
+            }
+            if (request.query.topic == "Resentment of elite") {
+                must.push({ "match": { "subTopic": "TUD" } });
+            }
             for (let i = 0; i < years.length; i++) {
                 const year = years[i];
                 const body = {
@@ -98,9 +99,7 @@ class TrendsController {
                         function_score: {
                             query: {
                                 bool: {
-                                    "must": {
-                                        "term": { "relevanceScore": 1 }
-                                    },
+                                    "must": must,
                                     filter: [
                                         { match_all: {} },
                                         { match_phrase: { topic: request.query.topic } },

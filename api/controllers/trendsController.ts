@@ -34,16 +34,6 @@ export class TrendsController {
     response: express.Response
   ) => {
 
-    const must = [];
-    const mustNot = [];
-    if (request.query.topic=="Left behind") {
-      must.push({"match": {"subTopic": "Economics" }});
-    }
-
-    if (request.query.topic=="Resentment of elite") {
-      must.push({"match": {"subTopic": "TUD" }});
-    }
-
     const body: any = {
       aggs: {
         "2": {
@@ -62,7 +52,7 @@ export class TrendsController {
       _source: { excludes: [] },
       query: {
         bool: {
-          must: must,
+          must: [],
           filter: [
             { match_all: {} },
             { match_phrase: { topic: request.query.topic } },
@@ -111,6 +101,20 @@ export class TrendsController {
     let returnQuotes:any = [];
     const years = ["2013","2014","2015","2016","2017","2018","2019","2020"];
 
+    const must = [];
+    const mustNot = [];
+
+    must.push({ "term" : { "relevanceScore" : 1 }})
+
+    if (request.query.topic=="Left behind") {
+      must.push({"match": {"subTopic": "Economics" }});
+    }
+
+    if (request.query.topic=="Resentment of elite") {
+      must.push({"match": {"subTopic": "TUD" }});
+    }
+
+
     for (let i=0;i<years.length;i++) {
       const year = years[i];
 
@@ -121,9 +125,7 @@ export class TrendsController {
           function_score: {
             query: {
               bool: {
-                "must" : {
-                  "term" : { "relevanceScore" : 1 }
-                },
+                "must": must,
                 filter: [
                   { match_all: {} },
                   { match_phrase: { topic: request.query.topic } },

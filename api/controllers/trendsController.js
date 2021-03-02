@@ -49,16 +49,7 @@ class TrendsController {
                                         format: "strict_date_optional_time",
                                     },
                                 },
-                            },
-                            {
-                                range: {
-                                    pageRank: {
-                                        gte: 0,
-                                        lte: 100000,
-                                        format: "strict_date_optional_time",
-                                    },
-                                },
-                            },
+                            }
                         ],
                         should: [],
                         must_not: [],
@@ -108,6 +99,15 @@ class TrendsController {
                                                 createdAt: {
                                                     gte: `${year}-01-01T00:00:00.000Z`,
                                                     lte: `${year}-12-31T23:59:59.990Z`,
+                                                    format: "strict_date_optional_time",
+                                                },
+                                            },
+                                        },
+                                        {
+                                            range: {
+                                                pageRank: {
+                                                    gte: 0,
+                                                    lte: 10000000,
                                                     format: "strict_date_optional_time",
                                                 },
                                             },

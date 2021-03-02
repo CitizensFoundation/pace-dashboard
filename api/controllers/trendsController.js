@@ -85,7 +85,7 @@ class TrendsController {
             const mustNot = [];
             must.push({ "term": { "relevanceScore": 1 } });
             if (request.query.topic == "Left behind") {
-                must.push({ "match": { "subTopic": "Economics" } });
+                must.push({ "match": { "subTopic": "Globalism" } });
             }
             if (request.query.topic == "Resentment of elite") {
                 must.push({ "match": { "subTopic": "TUD" } });

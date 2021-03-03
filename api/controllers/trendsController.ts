@@ -100,7 +100,7 @@ export class TrendsController {
     must.push({ "term" : { "relevanceScore" : 1 }})
 
     if (request.query.topic=="Left behind") {
-      must.push({"match": {"subTopic": "Globalism" }});
+      //must.push({"match": {"subTopic": "Globalism" }});
     }
 
     if (request.query.topic=="Resentment of elite") {

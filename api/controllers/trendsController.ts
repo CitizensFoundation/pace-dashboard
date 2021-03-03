@@ -67,7 +67,9 @@ export class TrendsController {
             }
           ],
           should: [],
-          must_not: [],
+          must_not: [
+            { "term" : { "relevanceScore" : 0 } }
+          ],
         },
       },
     };

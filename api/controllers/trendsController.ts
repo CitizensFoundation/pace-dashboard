@@ -98,6 +98,7 @@ export class TrendsController {
     const mustNot = [];
 
     must.push({ "term" : { "relevanceScore" : 1 }})
+    must.push({ "term" : { "secondRelevanceScore" : 1 }})
 
     if (request.query.topic=="Left behind") {
       //must.push({"match": {"subTopic": "Globalism" }});

@@ -101,7 +101,8 @@ export class TrendsController {
     must.push({ "term" : { "secondRelevanceScore" : 1 }})
 
     if (request.query.topic=="Left behind") {
-      must.push({"match": {"paragraph": ".*eft behind.*" }});
+      //must.push({"match": {"paragraph": ".*eft behind.*" }});
+      //must.push({"match": {"paragraph": ".*global.*" }});
       //must.push({"match": {"subTopic": "Globalism" }});
     }
 

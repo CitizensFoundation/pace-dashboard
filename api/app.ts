@@ -2,7 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import * as path from 'path';
 import * as url from 'url';
-const { Client } = require('@elastic/elasticsearch');
+const { Client } = require('@elastic/elasticsearch')
 
 export class App {
   public app: express.Application;

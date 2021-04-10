@@ -27,23 +27,23 @@ self.addEventListener('message', (event) => {
 self.__precacheManifest = [
   {
     "url": "index.html",
-    "revision": "88bb255004c47fdcca019f24f45ba8fe"
+    "revision": "d4ed2aa51f10514cbebb080da4d04605"
   },
   {
     "url": "polyfills/custom-elements-es5-adapter.84b300ee818dce8b351c7cc7c100bcf7.js",
     "revision": "cff507bc95ad1d6bf1a415cc9c8852b0"
   },
   {
-    "url": "polyfills/dynamic-import.b745cfc9384367cc18b42bbef2bbdcd9.js",
-    "revision": "ed55766050be285197b8f511eacedb62"
+    "url": "polyfills/dynamic-import.991be47e17117abb5eb15f5254ad3869.js",
+    "revision": "08b86a7f56c6f0d65265654299b16d74"
   },
   {
-    "url": "polyfills/webcomponents.d406f4685fdfb412c61f23b3ae18f2dc.js",
-    "revision": "b1db7cb76380495a55ff4f65a9648f0e"
+    "url": "polyfills/webcomponents.f2956532e796a677ef87a9cb17f5f9fc.js",
+    "revision": "939ef49522c9d6762c23f0a3fb10e87b"
   },
   {
-    "url": "your-grievances-app-e7f68b19.js",
-    "revision": "023731e95a0ebb769a030a86581fe709"
+    "url": "your-grievances-app-57082eb9.js",
+    "revision": "08a58bfbc47dafefd081263bdf5c6a4b"
   }
 ].concat(self.__precacheManifest || []);
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});

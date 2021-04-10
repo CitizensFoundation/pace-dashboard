@@ -66,7 +66,7 @@ class App {
             });
         }
         this.app.use(body_parser_1.default.json());
-        this.app.use(express_1.default.static(path.join(__dirname, '/../web-app/dist')));
+        this.app.use(express_1.default.static(path.join(__dirname, '../../web-app/dist')));
     }
     initializeControllers(controllers) {
         controllers.forEach((controller) => {

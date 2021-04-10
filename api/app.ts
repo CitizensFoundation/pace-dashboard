@@ -48,7 +48,7 @@ export class App {
     }
 
     this.app.use(bodyParser.json());
-    this.app.use(express.static(path.join(__dirname, '/../web-app/dist')));
+    this.app.use(express.static(path.join(__dirname, '../../web-app/dist')));
   }
 
   private initializeControllers(controllers: Array<any>) {

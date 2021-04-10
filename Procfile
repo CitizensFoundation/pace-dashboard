@@ -1,1 +1,1 @@
-web: node api/out-ts/server.js
+web: node api/out-tsc/server.js

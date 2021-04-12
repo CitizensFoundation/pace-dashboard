@@ -29,7 +29,7 @@ export class PageForceGraph extends LitElement {
   static get properties() {
     return {
       title: { type: String },
-      logo: { type: Function },
+      logo: { type: String },
     };
   }
 
@@ -42,20 +42,22 @@ export class PageForceGraph extends LitElement {
 
   firstUpdated() {
     super.firstUpdated();
-    const N = 22;
-    const gData = {
-      nodes: [...Array(N).keys()].map(i => ({ id: i })),
-      links: [...Array(N).keys()]
-        .filter(id => id)
-        .map(id => ({
-          source: id,
-          target: Math.round(Math.random() * (id-1))
-        }))
-    };
+
     const Graph = ForceGraph3D()
       (this.shadowRoot.getElementById('3d-graph'))
-        .showNavInfo(false)
-        .graphData(gData);
+      .jsonUrl('/graph.json')
+        .nodeAutoColorBy('target')
+        .nodeThreeObject(node => {
+          const sprite = new SpriteText(node.id);
+          sprite.material.depthWrite = false; // make sprite background transparent
+          sprite.color = node.color;
+          sprite.textHeight = 8;
+          return sprite;
+        });
+
+
+    Graph.d3Force('charge').strength(-500);
+
   }
 
   render() {

@@ -45,7 +45,7 @@ export class PageForceGraph extends LitElement {
 
     const Graph = ForceGraph3D()
       (this.shadowRoot.getElementById('3d-graph'))
-      .jsonUrl('/graph.json')
+      .jsonUrl('/2015distanceGraph.json')
         .nodeAutoColorBy('target')
         .nodeThreeObject(node => {
           const sprite = new SpriteText(node.id);
@@ -55,8 +55,8 @@ export class PageForceGraph extends LitElement {
           return sprite;
         });
 
-
-    Graph.d3Force('charge').strength(-500);
+    //Graph.d3Force('link').strength(link => { return link.value });
+    Graph.d3Force('charge').strength(-1200);
 
   }
 

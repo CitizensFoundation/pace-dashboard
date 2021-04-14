@@ -9,29 +9,40 @@ let graph = JSON.parse(rawdata);
 
 let newLinks = []
 
-const topicLimits = {
-  "Loss of religion": 900000,
-  "Nanny state": 200000,
-  "Qanon": 800000,
-  "Resentment of elite": 1600000,
-  "Income inequality": 140000,
-  "False accusations of racism": 120000,
-  "Call to vigilante action": 25000,
-  "Family disintegration": 300000,
-  "Citizen Engagement": 60000,
-  "Dehumanization of opponents": 35000,
-  "Feeling ignored": 14000,
-  "Undeserving support": 80000,
-  "Desire for strong man": 550000,
-  "Left behind": 110000,
-  "Evolving social mores": 400000,
-  "Distrust of media": 120000,
-  "Technology and alienation": 130000,
-  "Democratic Innovation": 11000,
-  "Losing cultural identity": 40000,
-  "Restrictions on free speech": 600000,
-  "Loss of sovereignty": 145000
+const average = elmt => {
+  var sum = 0;
+  for( var i = 0; i < elmt.length; i++ ){
+      sum += parseInt( elmt[i], 10 ); //don't forget to add the base
+  }
+
+  return sum/elmt.length;
 }
+
+const topicLimits = {
+  "Loss of religion": 429485,
+  "Nanny state": 2762,
+  "Qanon": 316,
+  "Resentment of elite": 561790,
+  "Income inequality": 36393,
+  "False accusations of racism": 11096,
+  "Call to vigilante action": 4062,
+  "Family disintegration": 102134,
+  "Citizen Engagement": 38798,
+  "Dehumanization of opponents": 10021,
+  "Feeling ignored": 2601,
+  "Undeserving support": 26591,
+  "Desire for strong man": 86757,
+  "Left behind": 17484,
+  "Evolving social mores": 92593,
+  "Distrust of media": 173,
+  "Technology and alienation": 50966,
+  "Democratic Innovation": 1771,
+  "Losing cultural identity": 5000,
+  "Restrictions on free speech": 121733,
+  "Loss of sovereignty": 58533
+}
+
+const TopicMinCutOff = 1700;
 
 const topicsLinks = {};
 
@@ -41,16 +52,18 @@ Object.keys(topicLimits).forEach(topic => {
   console.log("=== "+topic);
 
   graph.links.forEach( link => {
-
-
     if (link.source!="UKIP" && link.target!="UKIP") {
       if (link.source==topic || link.target==topic) {
-        const limit = Math.max(topicLimits[link.source], topicLimits[link.target])/1000000;
-        const newLinkValue = link.value*10000;
-        if (newLinkValue>limit) {
-          topicLinks.push({target: link.target, source: link.source, value: newLinkValue });
+        //console.log(`VALUE: ${link.value}`)
+        if (topicLimits[link.source]>TopicMinCutOff && topicLimits[link.target]>TopicMinCutOff) {
+          const normalizeBy = average([topicLimits[link.source], topicLimits[link.target]]);
+          //console.log(`NormalizeBy: ${normalizeBy}`)
+          const newLinkValue = (link.value/normalizeBy)*1000000000;
+          console.log(`VALUE NEW: ${newLinkValue}`)
+          if (newLinkValue>1.0) {
+            topicLinks.push({target: link.target, source: link.source, value: newLinkValue });
+          }
         }
-
       }
     }
     //console.log(topicLinks);
@@ -59,7 +72,7 @@ Object.keys(topicLimits).forEach(topic => {
   topicLinks = _.takeRight(_.sortBy(topicLinks, sortLink=>{
     console.log(`SortLink: ${JSON.stringify(sortLink)}`)
     return sortLink.value;
-  }), 3);
+  }), 2);
 
   console.log(topicLinks);
 

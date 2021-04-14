@@ -56,7 +56,7 @@ export class PageForceGraph extends LitElement {
         });
 
     //Graph.d3Force('link').strength(link => { return link.value });
-    Graph.d3Force('charge').strength(-1200);
+    Graph.d3Force('charge').strength(-1500);
 
   }
 

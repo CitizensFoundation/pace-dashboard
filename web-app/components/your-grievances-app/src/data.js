@@ -152,7 +152,7 @@ export const Data = [
     }
   },
   {
-    title: "Distrust of Traditional Media",
+    title: "Fake News / Distrust of Traditional Media",
     topicName: "Distrust of media",
     description: "With the loss of centralized broadcast authorities, in a splintered, narrow-cast media market, demonstrable effort by bad actors to commit misinformation campaigns across all platforms, despite efforts of journalists and watchdogs, the “truth” becomes up for debate.",
     dataSet: {

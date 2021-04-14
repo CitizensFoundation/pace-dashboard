@@ -36,13 +36,13 @@ const topicLimits = {
   "Evolving social mores": 92593,
   "Distrust of media": 173,
   "Technology and alienation": 50966,
-  "Democratic Innovation": 1771,
+  "Democratic Innovation": 2971,
   "Losing cultural identity": 5000,
   "Restrictions on free speech": 121733,
   "Loss of sovereignty": 58533
 }
 
-const TopicMinCutOff = 1700;
+const TopicMinCutOff = 2770;
 
 const topicsLinks = {};
 
@@ -56,13 +56,16 @@ Object.keys(topicLimits).forEach(topic => {
       if (link.source==topic || link.target==topic) {
         //console.log(`VALUE: ${link.value}`)
         if (topicLimits[link.source]>TopicMinCutOff && topicLimits[link.target]>TopicMinCutOff) {
-          const normalizeBy = average([topicLimits[link.source], topicLimits[link.target]]);
+          //const normalizeBy = average([topicLimits[link.source], topicLimits[link.target]]);
+          const normalizeBy = Math.max(topicLimits[link.source], topicLimits[link.target]);
           //console.log(`NormalizeBy: ${normalizeBy}`)
           const newLinkValue = (link.value/normalizeBy)*1000000000;
           console.log(`VALUE NEW: ${newLinkValue}`)
-          if (newLinkValue>1.0) {
+          if (newLinkValue>0.0) {
             topicLinks.push({target: link.target, source: link.source, value: newLinkValue });
           }
+        } else {
+          console.warn("Skipping")
         }
       }
     }
@@ -72,7 +75,7 @@ Object.keys(topicLimits).forEach(topic => {
   topicLinks = _.takeRight(_.sortBy(topicLinks, sortLink=>{
     console.log(`SortLink: ${JSON.stringify(sortLink)}`)
     return sortLink.value;
-  }), 2);
+  }), 3);
 
   console.log(topicLinks);
 

@@ -162,7 +162,7 @@ export class YourGrievancesApp extends LitElement {
       `;
       case '2':
           return html`
-            <page-force-graph></page-force-graph>
+            <h1>TBD</h1>
           `;
         default:
         return html`

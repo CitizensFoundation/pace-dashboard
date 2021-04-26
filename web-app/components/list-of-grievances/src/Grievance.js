@@ -103,6 +103,10 @@ export class Grievance extends BaseElement {
         mwc-icon {
           color: #000;
         }
+
+        a {
+          color: #444;
+        }
       `,
     ];
   }

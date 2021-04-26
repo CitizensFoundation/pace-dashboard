@@ -68,7 +68,7 @@ export class TrendsController {
           ],
           should: [],
           must_not: [
-            //{ "term" : { "relevanceScore" : 0 } }
+            { "term" : { "relevanceScore" : 0 } }
           ],
         },
       },
@@ -110,7 +110,7 @@ export class TrendsController {
     }*/
 
     // Main
-//    mustNot.push({ term: { relevanceScore: 0 } });
+    mustNot.push({ term: { relevanceScore: 0 } });
 
     /*must.push({
       "script": {

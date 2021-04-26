@@ -37,7 +37,7 @@ class TrendsController {
                 _source: { excludes: [] },
                 query: {
                     bool: {
-                        must: [{ term: { oneTwoRelevanceScore: 1 } }],
+                        must: [{ term: { oneTwoRelevanceScoreV2: 1 } }],
                         filter: [
                             { match_all: {} },
                             { match_phrase: { topic: request.query.topic } },
@@ -53,7 +53,7 @@ class TrendsController {
                         ],
                         should: [],
                         must_not: [
-                        //{ "term" : { "relevanceScore" : 0 } }
+                            { "term": { "relevanceScore": 0 } }
                         ],
                     },
                 },
@@ -76,15 +76,16 @@ class TrendsController {
             const years = ["2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020"];
             const must = [];
             const mustNot = [];
-            must.push({ term: { oneTwoRelevanceScore: 1 } });
+            must.push({ term: { oneTwoRelevanceScoreV2: 1 } });
             if (request.query.topic == "Left behind") {
                 //must.push({"match": {"paragraph": ".*eft behind.*" }});
                 //must.push({"match": {"paragraph": ".*global.*" }});
                 //must.push({"match": {"subTopic": "Globalism" }});
             }
-            if (request.query.topic == "Resentment of elite") {
-                mustNot.push({ "match": { "subTopic": "Climate denial" } });
-            }
+            /* if (request.query.topic=="Resentment of elite") {
+                mustNot.push({"match": {"subTopic": "Climate denial" }});
+             }*/
+            // Main
             mustNot.push({ term: { relevanceScore: 0 } });
             /*must.push({
               "script": {

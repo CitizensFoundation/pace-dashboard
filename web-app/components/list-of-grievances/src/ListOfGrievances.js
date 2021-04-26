@@ -14,12 +14,43 @@ export class ListOfGrievances extends BaseElement {
         color: var(--page-one-text-color);
       }
 
+        .mdc-card {
+          max-width: 850px;
+          padding: 16px;
+          cursor: pointer;
+        }
+        .content {
+          padding: 1rem;
+        }
+        .subtext {
+          color: rgba(0, 0, 0, 0.54);
+        }
+
+        .group-spaced {
+          justify-content: space-around;
+        }
+
+        .group-spaced > * {
+          margin: 0 8px;
+        }
+
       .container {
         display: flex;
         flex-direction: column;
         flex-basis: auto;
         width: 100%;
       }
+
+
+      .contentText {
+          font-size: 16px !important;
+        }
+
+        .contentTitle {
+          font-size: 20px;
+          margin-top: 0;
+        }
+
     `;
   }
 

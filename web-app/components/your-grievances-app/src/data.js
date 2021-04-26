@@ -54,9 +54,9 @@ export const Data = [
   },
   {
     currrentCount: createRandomData(DataLabels.length)[0],
-    title: "Alienated by the Progress of Technology",
+    title: "Choice of Conspiracy over Dominant Culture",
     topicName: "Technology and alienation",
-    description: "Dubbed “future shock” over 40 years ago, the progress from pastoral, to agrarian, to industrial, to information age happened at such an accelerated rate that social adaptations and institutions were unable to keep pace. Ideas of no work and no scarcity are therefore beyond comprehension for many.",
+    description: "Alienated by social complexity, technology, entertainment, and revisionist history, many populist voices urge the rejection of the official narrative of history and the dominant culture, from politicians to alt-right media and grass roots social media. Needing an alternative to the official narrative, conspiracy theorists eagerly fill the gap.",
     quote: "The deepening gulf between public and scientific viewpoints lies behind some of the most visible clashes in society, from the blanket rejection of genetically modified organisms, the growth of anti-vaccine campaigns, confrontations between scientists and Creationists, and the dismissal of climate change research.",
     dataSet: {
       data: createRandomData(DataLabels.length),
@@ -160,9 +160,9 @@ export const Data = [
     }
   },
   {
-    title: "Perceived False Accusations of Racism",
+    title: "Conflict over Race/Racism/Identity",
     topicName: "False accusations of racism",
-    description: "Starkly laid bare lately in the US, European populist narratives have also been deeply ingrained in discussions of purity of blood. With anti-discrimination laws on the books, many may feel they can say they do not live in a racist society, despite constant testimony and protest from POC that they do.",
+    description: `The core conflict for many on the Left and Right, whether explicit or implicit, with both sides finding much to agitate about and revile in the other. Accusations of racism, labels like white “fragility” and “privilege”, removal of public monuments, purges of the “woke”, demands for reparations for history -- all create a volatility that prevents real understanding.`,
     dataSet: {
       borderColor: "#2594f8",
     }
@@ -176,7 +176,7 @@ export const Data = [
     }
   },
   {
-    title: "Call to Vigilante Action/Enforcement of Populist Agenda",
+    title: "Call to Voter Suppression/Vigilantism",
     topicName: "Call to vigilante action",
     description: "Feeling betrayed by mainstream media and popular opinion, supporters of populist causes decide to take the law into their own hands to manifest the political outcome they seek, without regard for democratic process.",
     dataSet: {
@@ -199,14 +199,14 @@ export const Data = [
       borderColor: "#0524e8",
     }
   },
-  {
+/*  {
     title: "Fear of Loss of Sovereignty",
     topicName: "Loss of sovereignty",
     description: "The rise of ultra-nationalistic and ethno-nationalistic sentiment originates in the perceived threat of global government or federated authority that would strip sovereign rights from traditional nation states, thus abrogating essential “freedoms” once guaranteed by those nation states.",
     dataSet: {
       borderColor: "#95a428",
     }
-  },
+  },*/
   {
     title: "Resentment of Immigrant/Minority Receiving “Undeserved Support”",
     topicName: "Undeserving support",

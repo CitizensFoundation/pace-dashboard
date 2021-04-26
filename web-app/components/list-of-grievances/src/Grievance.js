@@ -150,38 +150,6 @@ export class Grievance extends BaseElement {
                   this.fire('close-grievance');
                 }}"
               >close</mwc-icon>
-              <div class="laysout vertical">
-                <div
-                  class="group-spsaced layout horizontal center-center"
-                  style="margin-left:auto;margin-right:auto;width:100%;margin-top:16px;"
-                >
-                  <div style="width: 300px;margin-left:32px;margin-right: 174px; ">
-                    <mwc-textarea
-                      outlined=""
-                      label="Your story"
-                      helper="Share your story anonymously"
-                      helperpersistent=""
-                      maxlength="500"
-                      charcounter=""
-                    >
-                    </mwc-textarea>
-                    <mwc-button raised="" label="Add story"></mwc-button>
-                  </div>
-                  <div class="flex"></div>
-                  <div style="width: 300px">
-                    <mwc-textarea
-                      outlined=""
-                      label="Solution?"
-                      helper="Can you think of a solution for the grievance"
-                      helperpersistent=""
-                      maxlength="500"
-                      charcounter=""
-                    >
-                    </mwc-textarea>
-                    <mwc-button raised="" label="Add solution"></mwc-button>
-                  </div>
-                </div>
-              </div>
             `
           : null}
       </div>

@@ -52,7 +52,7 @@ export class TrendsController {
       _source: { excludes: [] },
       query: {
         bool: {
-          must: [{ term: { oneTwoRelevanceScore: 1 } }],
+          must: [{ term: { oneTwoRelevanceScoreV2: 1 } }],
           filter: [
             { match_all: {} },
             { match_phrase: { topic: request.query.topic } },
@@ -95,9 +95,9 @@ export class TrendsController {
     const years = ["2013","2014","2015","2016","2017","2018","2019","2020"];
 
     const must = [];
-    const mustNot = [];
+    const mustNot:any = [];
 
-    must.push({ term: { oneTwoRelevanceScore: 1 } });
+    must.push({ term: { oneTwoRelevanceScoreV2: 1 } });
 
     if (request.query.topic=="Left behind") {
       //must.push({"match": {"paragraph": ".*eft behind.*" }});
@@ -105,11 +105,12 @@ export class TrendsController {
       //must.push({"match": {"subTopic": "Globalism" }});
     }
 
-    if (request.query.topic=="Resentment of elite") {
+   /* if (request.query.topic=="Resentment of elite") {
        mustNot.push({"match": {"subTopic": "Climate denial" }});
-    }
+    }*/
 
-    mustNot.push({ term: { relevanceScore: 0 } });
+    // Main
+//    mustNot.push({ term: { relevanceScore: 0 } });
 
     /*must.push({
       "script": {

@@ -246,11 +246,21 @@ export class Grievance extends BaseElement {
             years[yearPart] = topicQuotes[i]._source.paragraph;
           }
 
-          if (false && this.grievanceData.topicName=="QAnon") {
-            years["2013"]="No data";
-            years["2014"]="No data";
-            years["2015"]="No data";
-            years["2016"]="No data";
+          if (this.grievanceData.topicName=="QAnon") {
+            years["2013"]="Not enough data";
+            years["2014"]="Not enough data";
+            years["2015"]="Not enough data";
+            years["2016"]="Not enough data";
+          }
+
+          if (this.grievanceData.topicName=="Nanny state") {
+            years["2013"]="Not enough data";
+            years["2014"]="Not enough data";
+            years["2015"]="Not enough data";
+            years["2016"]="Not enough data";
+            years["2017"]="Not enough data";
+            years["2018"]="Not enough data";
+            years["2019"]="Not enough data";
           }
 
           const flatTopicQuotes = [];

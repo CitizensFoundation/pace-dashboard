@@ -78,7 +78,7 @@ export class ListOfGrievances extends BaseElement {
             <h2 class="mdc-typography--title contentTitle">Introduction</h2>
             <div class="mdc-typography--body1 subtext contentText">
               Here you see relative trends between different topics connected to populism, nativism
-              and civic engagment. We use
+              and civic engagement. We use
               <a href="https://commoncrawl.org/" target="_blank">CommonCrawl</a>, where we scan
               crawls from every year from 2013 for hundreds of keywords that are then filtered
               through BERT based AI algorithms that have been trained to recognize the different

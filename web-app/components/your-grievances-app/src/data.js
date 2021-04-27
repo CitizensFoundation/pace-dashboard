@@ -27,6 +27,14 @@ export const Data = [
     }
   },
   {
+    title: "Fake News / Distrust of Traditional Media",
+    topicName: "Distrust of media",
+    description: "With the loss of centralized broadcast authorities, in a splintered, narrow-cast media market, demonstrable effort by bad actors to commit misinformation campaigns across all platforms, despite efforts of journalists and watchdogs, the “truth” becomes up for debate.",
+    dataSet: {
+      borderColor: "#551498",
+    }
+  },
+  {
     currrentCount: createRandomData(DataLabels.length)[0],
     title: "Disintegration of Traditional Family Unit",
     topicName: "Family disintegration",
@@ -37,6 +45,14 @@ export const Data = [
       label: "Family Disintegration",
       borderColor: "#8e5ea2",
       fill: false
+    }
+  },
+  {
+    title: "Restrictions on Populist “Free Speech”",
+    topicName: "Restrictions on free speech",
+    description: "Free speech forms a cornerstone of tolerant, democratic society; as such only intolerant, illiberal, anti-democratic speech represents a threat. Restrictions on populist messages that fit these criteria outraged the populist base, and turned free speech and “cancel culture” into a battleground.",
+    dataSet: {
+      borderColor: "#0584a8",
     }
   },
   {
@@ -152,14 +168,6 @@ export const Data = [
     }
   },
   {
-    title: "Fake News / Distrust of Traditional Media",
-    topicName: "Distrust of media",
-    description: "With the loss of centralized broadcast authorities, in a splintered, narrow-cast media market, demonstrable effort by bad actors to commit misinformation campaigns across all platforms, despite efforts of journalists and watchdogs, the “truth” becomes up for debate.",
-    dataSet: {
-      borderColor: "#551498",
-    }
-  },
-  {
     title: "Conflict over Race/Racism/Identity",
     topicName: "False accusations of racism",
     description: `The core conflict for many on the Left and Right, whether explicit or implicit, with both sides finding much to agitate about and revile in the other. Accusations of racism, labels like white “fragility” and “privilege”, removal of public monuments, purges of the “woke”, demands for reparations for history -- all create a volatility that prevents real understanding.`,
@@ -189,14 +197,6 @@ export const Data = [
     description: "Viewing political opponents as illegitimate, or even as inhuman, invalidates the votes of those opponents and the content of their opinions, making it easier for the populist supporters to disengage from the democratic process and doubt or disregard polling outcomes.",
     dataSet: {
       borderColor: "#a50418",
-    }
-  },
-  {
-    title: "Restrictions on Populist “Free Speech”",
-    topicName: "Restrictions on free speech",
-    description: "Free speech forms a cornerstone of tolerant, democratic society; as such only intolerant, illiberal, anti-democratic speech represents a threat. Restrictions on populist messages that fit these criteria outraged the populist base, and turned free speech and “cancel culture” into a battleground.",
-    dataSet: {
-      borderColor: "#0584a8",
     }
   },
 /*  {

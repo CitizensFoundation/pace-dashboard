@@ -48,6 +48,16 @@ export class PageForceGraph extends BaseElement {
         top: 0;
         background-color: transparent;
         color: #FFF;
+        opacity: 0;
+        -webkit-transition: opacity 1s ease-in;
+          -moz-transition: opacity 1s ease-in;
+            -ms-transition: opacity 1s ease-in;
+            -o-transition: opacity 1s ease-in;
+                transition: opacity 1s ease-in;
+      }
+
+      .infoBox[is-active] {
+        opacity: 1 !important;
       }
 
       .descriptionBox {
@@ -60,6 +70,16 @@ export class PageForceGraph extends BaseElement {
         font-size: 12px;
         color: #FFF;
         background-color: transparent;
+        opacity: 0;
+        -webkit-transition: opacity 1s ease-in;
+          -moz-transition: opacity 1s ease-in;
+            -ms-transition: opacity 1s ease-in;
+            -o-transition: opacity 1s ease-in;
+                transition: opacity 1s ease-in;
+      }
+
+      .descriptionBox[is-active] {
+        opacity: 1  !important;
       }
 
       .containerMain {
@@ -81,6 +101,7 @@ export class PageForceGraph extends BaseElement {
       topicCounts: { type: Object },
       currentYear: { type: Number },
       allGraphs: { type: Number },
+      infoBoxesActive: { type: Number }
     };
   }
 
@@ -264,6 +285,10 @@ export class PageForceGraph extends BaseElement {
       nodes: [],
       links: [],
     };
+    this.infoBoxesActive = false;
+    setTimeout(()=>{
+      this.infoBoxesActive = true;
+    }, 250);
   }
 
   firstUpdated() {
@@ -279,11 +304,11 @@ export class PageForceGraph extends BaseElement {
   render() {
     return html`
       <div class="containerMain">
-        <div class="infoBox shadow-animation shadow-elevation-3dp">
+        <div class="infoBox shadow-animation shadow-elevation-3dp" ?is-active="${this.infoBoxesActive}">
           <mwc-slider step="1" pin markers min="14" max="20" @input="${this._sliderChanged}" value="14"> </mwc-slider>
           <div>Top connected: ${this.currentYear}</div>
         </div>
-        <div class="descriptionBox shadow-animation shadow-elevation-3dp">
+        <div class="descriptionBox shadow-animation shadow-elevation-3dp" ?is-active="${this.infoBoxesActive}">
           Connection strength is calculated by comparing all paragraphs from all found domain names and the top 2 strongest links between topics are displayed in this graph for each year.
         </div>
 

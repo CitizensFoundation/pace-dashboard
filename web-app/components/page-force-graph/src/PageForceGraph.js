@@ -16,7 +16,7 @@ export class PageForceGraph extends BaseElement {
       css`
       :host {
         display: block;
-        padding: 25px;
+        margin: 28px;
         text-align: center;
       }
 
@@ -45,18 +45,20 @@ export class PageForceGraph extends BaseElement {
         padding: 16px;
         z-index: 1000;
         width: 400px;
-        top: 16px;
+        top: 0;
         background-color: transparent;
         color: #FFF;
       }
 
-      .sliderBox {
+      .descriptionBox {
         position: absolute;
         right: 16px;
         text-align: center;
         z-index: 1000;
         width: 400px;
-        top: 16px;
+        top: 42px;
+        font-size: 12px;
+        color: #FFF;
         background-color: transparent;
       }
 
@@ -64,10 +66,8 @@ export class PageForceGraph extends BaseElement {
         position: relative;
       }
 
-      #3d-graph {
-        margin-left: 24px;
-        margin-right: 24px;
-
+     canvas {
+        width: 95vw !important;
       }
     `];
   }
@@ -283,6 +283,11 @@ export class PageForceGraph extends BaseElement {
           <mwc-slider step="1" pin markers min="14" max="20" @input="${this._sliderChanged}" value="14"> </mwc-slider>
           <div>Top connected: ${this.currentYear}</div>
         </div>
+        <div class="descriptionBox shadow-animation shadow-elevation-3dp">
+          Connection strength is calculated by comparing all paragraphs from all found domain names.
+          Strengths are normalized and the top 2 links are displayed in this graph for each year.
+        </div>
+
         <div id="3d-graph"></div>
       </div>
     `;

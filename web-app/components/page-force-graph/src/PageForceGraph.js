@@ -3,12 +3,15 @@ import { BaseElement } from '../../your-grievances-app/src/baseElement';
 
 import { takeRight, sortBy } from 'lodash-es';
 import '@material/mwc-slider';
+import { ShadowStyles } from '../../your-grievances-app/src/shadow-styles';
 
 //const ForceGraph3D = require('3d-force-graph');
 
 export class PageForceGraph extends BaseElement {
   static get styles() {
-    return css`
+    return [
+      ShadowStyles,
+      css`
       :host {
         display: block;
         padding: 25px;
@@ -29,10 +32,36 @@ export class PageForceGraph extends BaseElement {
       }
 
       mwc-slider {
-        max-width: 800px;
-        width: 800px;
+        width: 350px;
+        margin: 8px;
       }
-    `;
+
+      .infoBox {
+        position: absolute;
+        left: 16px;
+        text-align: center;
+        padding: 16px;
+        z-index: 1000;
+        width: 400px;
+        top: 16px;
+        background-color: transparent;
+        color: #FFF;
+      }
+
+      .sliderBox {
+        position: absolute;
+        right: 16px;
+        text-align: center;
+        z-index: 1000;
+        width: 400px;
+        top: 16px;
+        background-color: transparent;
+      }
+
+      .containerMain {
+        position: relative;
+      }
+    `];
   }
 
   static get properties() {
@@ -232,8 +261,15 @@ export class PageForceGraph extends BaseElement {
 
   render() {
     return html`
-      <mwc-slider step="1" pin markers min="14" max="20" @change="${this._sliderChanged}" value="14"> </mwc-slider>
-      <div id="3d-graph"></div>
+      <div class="containerMain">
+        <div class="infoBox shadow-animation shadow-elevation-3dp">
+          <mwc-slider step="1" pin markers min="14" max="20" @input="${this._sliderChanged}" value="14"> </mwc-slider>
+          <div>Top connected topics: ${this.currentYear}</div>
+        </div>
+        <div class="sliderBox shadow-animation shadow-elevation-3dp">
+        </div>
+        <div id="3d-graph"></div>
+      </div>
     `;
   }
 }

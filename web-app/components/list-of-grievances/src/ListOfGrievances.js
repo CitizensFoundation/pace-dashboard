@@ -75,7 +75,7 @@ export class ListOfGrievances extends BaseElement {
         <div class="mdc-card__primary-action">
           <div class="mdc-card__media mdc-card__media--16-9 my-media"></div>
           <div class="content">
-            <h2 class="mdc-typography--title contentTitle">Introduction</h2>
+            <h2 class="mdc-typography--title contentTitle">Introduction to the PaCE Dashboard</h2>
             <div class="mdc-typography--body1 subtext contentText">
               Here you see relative trends between different topics connected to populism, nativism
               and civic engagement. We use
@@ -87,7 +87,7 @@ export class ListOfGrievances extends BaseElement {
                 targer="_blank"
                 href="https://docs.google.com/document/d/1-C6GJAy3GCl7nO_HUyaKKk07x5ydMAMMLMGESwIdtpk"
                 >more detailed information here.</a
-              >
+              > The PaCE Dashboard is a part of the Horizon 2020 funded <a href="https://popandce.eu/" target="_blank">Populism and Civic Enagment project.</a>
             </div>
           </div>
         </div>

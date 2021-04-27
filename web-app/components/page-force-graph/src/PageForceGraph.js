@@ -71,6 +71,7 @@ export class PageForceGraph extends BaseElement {
     if (this.allGraphs[this.currentYear]) {
       if (!this.graph) {
         this.graph = ForceGraph3D({ controlType: 'orbit' })(this.shadowRoot.getElementById('3d-graph'))
+          .showNavInfo(false)
           .graphData(this.allGraphs[this.currentYear])
           .nodeThreeObject(node => {
             const sprite = new SpriteText(node.id);

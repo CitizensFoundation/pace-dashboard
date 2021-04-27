@@ -2,6 +2,7 @@ import { html, css, LitElement, supportsAdoptingStyleSheets } from 'lit-element'
 import { BaseElement } from '../../your-grievances-app/src/baseElement';
 
 import { takeRight, sortBy } from 'lodash-es';
+import '@material/mwc-slider';
 
 //const ForceGraph3D = require('3d-force-graph');
 
@@ -26,6 +27,11 @@ export class PageForceGraph extends BaseElement {
           transform: rotate(360deg);
         }
       }
+
+      mwc-slider {
+        max-width: 800px;
+        width: 800px;
+      }
     `;
   }
 
@@ -37,72 +43,73 @@ export class PageForceGraph extends BaseElement {
       currentGraphData: { type: Object },
       topicCounts: { type: Object },
       currentYear: { type: Number },
-      allGraphs: { type: Number }
+      allGraphs: { type: Number },
     };
   }
 
   fetchAllYears() {
-    const yearsToFetch = [2014,2015,2016,2017,2018,2019,2020];
-    for (let i=0;i<yearsToFetch.length;i++) {
+    const yearsToFetch = [2014, 2015, 2016, 2017, 2018, 2019, 2020];
+    for (let i = 0; i < yearsToFetch.length; i++) {
       fetch(`./${yearsToFetch[i]}.json`, { credentials: 'same-origin' })
-      .then(res => res.json())
-      .then(response => {
-        if (!response.nodata) {
-          this.allGraphs[yearsToFetch[i]] = response;
+        .then(res => res.json())
+        .then(response => {
+          if (!response.nodata) {
+            this.allGraphs[yearsToFetch[i]] = response;
 
-          if (this.currentYear==yearsToFetch[i]) {
-            this.setGraphData();
+            if (this.currentYear == yearsToFetch[i]) {
+              this.setGraphData();
+            }
           }
-        }
-      })
-      .catch(error => {
-        this.fire('app-error', error);
-      });
+        })
+        .catch(error => {
+          this.fire('app-error', error);
+        });
     }
   }
 
   setGraphData() {
     if (this.allGraphs[this.currentYear]) {
       if (!this.graph) {
-        this.graph = ForceGraph3D()
-        (this.shadowRoot.getElementById('3d-graph'))
-          .graphData({...this.allGraphs[this.currentYear]})
+        this.graph = ForceGraph3D({ controlType: 'orbit' })(this.shadowRoot.getElementById('3d-graph'))
+          .graphData(this.allGraphs[this.currentYear])
           .nodeThreeObject(node => {
             const sprite = new SpriteText(node.id);
             sprite.material.depthWrite = false; // make sprite background transparent
-            sprite.color = "#FFFFFF"; //node.color;
+            sprite.color = '#FFFFFF'; //node.color;
             sprite.textHeight = 8;
             return sprite;
           });
+          this.firstNodes = this.allGraphs[this.currentYear].nodes;
         //Graph.d3Force('link').strength(link => { return link.value });
-        this.graph.d3Force('charge').strength(-990);
+        this.graph.d3Force('charge').strength(-600);
       } else {
+        debugger;
         this.graph.graphData({
-          nodes: this.allGraphs[this.currentYear].nodes,
-          links: this.allGraphs[this.currentYear].links
-        })
+          nodes: this.firstNodes,
+          links: this.allGraphs[this.currentYear].links,
+        });
       }
 
-      setTimeout(()=>{
-        this.currentYear = Math.min(this.currentYear+1, 2020);
+      /*setTimeout(() => {
+        this.currentYear = Math.min(this.currentYear + 1, 2020);
         this.setGraphData();
         console.error(this.currentYear);
-      }, 5000);
+      }, 5000);*/
 
       return;
 
       this.waitingOnData = false;
 
-      let newLinks = []
+      let newLinks = [];
 
       const average = elmt => {
         var sum = 0;
-        for( var i = 0; i < elmt.length; i++ ){
-            sum += parseInt( elmt[i], 10 ); //don't forget to add the base
+        for (var i = 0; i < elmt.length; i++) {
+          sum += parseInt(elmt[i], 10); //don't forget to add the base
         }
 
-        return sum/elmt.length;
-      }
+        return sum / elmt.length;
+      };
 
       const TopicMinCutOff = 2770;
 
@@ -111,13 +118,16 @@ export class PageForceGraph extends BaseElement {
       Object.keys(this.counts).forEach(topic => {
         let topicLinks = [];
 
-        console.log("=== "+topic);
+        console.log('=== ' + topic);
 
-        graph.links.forEach( link => {
-          if (link.source!="UKIP" && link.target!="UKIP") {
-            if (link.source==topic || link.target==topic) {
+        graph.links.forEach(link => {
+          if (link.source != 'UKIP' && link.target != 'UKIP') {
+            if (link.source == topic || link.target == topic) {
               //console.log(`VALUE: ${link.value}`)
-              if (topicLimits[link.source]>TopicMinCutOff && topicLimits[link.target]>TopicMinCutOff) {
+              if (
+                topicLimits[link.source] > TopicMinCutOff &&
+                topicLimits[link.target] > TopicMinCutOff
+              ) {
                 //const normalizeBy = average([topicLimits[link.source], topicLimits[link.target]]);
 
                 const sourceCount = this.counts[topicLimits[link.source]][this.currentYear];
@@ -127,33 +137,39 @@ export class PageForceGraph extends BaseElement {
 
                 const normalizeBy = Math.max(sourceCount, targetCount);
                 //console.log(`NormalizeBy: ${normalizeBy}`)
-                const newLinkValue = (link.value/normalizeBy)*1000000000;
-                console.log(`VALUE NEW: ${newLinkValue}`)
-                if (newLinkValue>0.0) {
-                  topicLinks.push({target: link.target, source: link.source, value: newLinkValue });
+                const newLinkValue = (link.value / normalizeBy) * 1000000000;
+                console.log(`VALUE NEW: ${newLinkValue}`);
+                if (newLinkValue > 0.0) {
+                  topicLinks.push({
+                    target: link.target,
+                    source: link.source,
+                    value: newLinkValue,
+                  });
                 }
               } else {
-                console.warn("Skipping")
+                console.warn('Skipping');
               }
             }
           }
           //console.log(topicLinks);
         });
 
-        topicLinks = takeRight(sortBy(topicLinks, sortLink=>{
-          console.log(`SortLink: ${JSON.stringify(sortLink)}`)
-          return sortLink.value;
-        }), 3);
+        topicLinks = takeRight(
+          sortBy(topicLinks, sortLink => {
+            console.log(`SortLink: ${JSON.stringify(sortLink)}`);
+            return sortLink.value;
+          }),
+          3,
+        );
 
         console.log(topicLinks);
 
         newLinks = newLinks.concat(topicLinks);
-
       });
 
       this.graphData = {
-        nodes:  graph.nodes,
-        links: newLinks
+        nodes: graph.nodes,
+        links: newLinks,
       };
 
       /*const links = [];
@@ -187,8 +203,6 @@ export class PageForceGraph extends BaseElement {
         }
       }
       */
-
-
     }
   }
 
@@ -201,21 +215,23 @@ export class PageForceGraph extends BaseElement {
     this.fetchAllYears();
     this.graphData = {
       nodes: [],
-      links: []
+      links: [],
     };
   }
 
   firstUpdated() {
     super.firstUpdated();
-    setTimeout(()=>{
+    setTimeout(() => {});
+  }
 
-
-    })
-
+  _sliderChanged(event) {
+    this.currentYear = event.detail.value+2000;
+    this.setGraphData();
   }
 
   render() {
     return html`
+      <mwc-slider step="1" pin markers min="14" max="20" @change="${this._sliderChanged}" value="14"> </mwc-slider>
       <div id="3d-graph"></div>
     `;
   }

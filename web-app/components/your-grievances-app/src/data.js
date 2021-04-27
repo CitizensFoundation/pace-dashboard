@@ -228,7 +228,7 @@ export const Data = [
     topicName: "Democratic Innovation",
     description: "As further control, we searched for textual instances of innovation, progress and engagement in democratic processes discussed, critiqued, extolled, or referenced.",
     dataSet: {
-      borderColor: "#b63134",
+      borderColor: "#2631f4",
     }
   }
 ]

@@ -250,8 +250,6 @@ export class Grievance extends BaseElement {
             years[yearPart] = topicQuotes[i]._source.paragraph;
           }
 
-          console.error(this.grievanceData.topicName)
-
           if (this.grievanceData.topicName=="Qanon") {
             years["2013"]="Not enough data";
             years["2014"]="Not enough data";

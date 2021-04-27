@@ -79,15 +79,19 @@ export class ListOfGrievances extends BaseElement {
             <div class="mdc-typography--body1 subtext contentText">
               Here you see relative trends between different topics connected to populism, nativism
               and civic engagement. We use
-              <a href="https://commoncrawl.org/" target="_blank">CommonCrawl</a>, where we search for keywords in full
-              web crawls from every year from 2013 for hundreds of keywords that are then filtered
-              through BERT based AI algorithms that have been trained to recognize the different
-              topics. There is
+              <a href="https://commoncrawl.org/" target="_blank">CommonCrawl</a>, where we search
+              for keywords in full web crawls from every year from 2013 for hundreds of keywords
+              that are then filtered through BERT based AI algorithms that have been trained to
+              recognize the different topics. There is
               <a
                 targer="_blank"
                 href="https://docs.google.com/document/d/1-C6GJAy3GCl7nO_HUyaKKk07x5ydMAMMLMGESwIdtpk"
                 >more detailed information here.</a
-              > The PaCE Dashboard is a part of the Horizon 2020 funded <a href="https://popandce.eu/" target="_blank">Populism and Civic Enagment project.</a>
+              >
+              The PaCE Dashboard is a part of the Horizon 2020 funded
+              <a href="https://popandce.eu/" target="_blank"
+                >Populism and Civic Engagement project.</a
+              >
             </div>
           </div>
         </div>

@@ -100,7 +100,7 @@ export const Data = [
     dataSet: {
       data: createRandomData(DataLabels.length),
       label: "Inequality",
-      borderColor: "#8ea25e",
+      borderColor: "#8ea2ce",
       fill: false
     }
   },
@@ -126,7 +126,7 @@ export const Data = [
     dataSet: {
       data: createRandomData(DataLabels.length),
       label: "Strong Man",
-      borderColor: "#19e8c3",
+      borderColor: "#89c863",
       fill: false
     }
   },
@@ -172,7 +172,7 @@ export const Data = [
     topicName: "Nanny state",
     description: "Given the core platform of the populists, “starve the beast”, “dismantle the nanny state”, 	deregulation, cancellation of social programs, it’s no surprise that when called upon to embrace collectivist policies regulating movement and mandating masks, core supporters rebelled en masse.",
     dataSet: {
-      borderColor: "#F524f8",
+      borderColor: "#c514c8",
     }
   },
   {
@@ -180,7 +180,7 @@ export const Data = [
     topicName: "Call to vigilante action",
     description: "Feeling betrayed by mainstream media and popular opinion, supporters of populist causes decide to take the law into their own hands to manifest the political outcome they seek, without regard for democratic process.",
     dataSet: {
-      borderColor: "#454458",
+      borderColor: "#c53428",
     }
   },
   {
@@ -196,7 +196,7 @@ export const Data = [
     topicName: "Restrictions on free speech",
     description: "Free speech forms a cornerstone of tolerant, democratic society; as such only intolerant, illiberal, anti-democratic speech represents a threat. Restrictions on populist messages that fit these criteria outraged the populist base, and turned free speech and “cancel culture” into a battleground.",
     dataSet: {
-      borderColor: "#0524e8",
+      borderColor: "#0584a8",
     }
   },
 /*  {
@@ -220,7 +220,7 @@ export const Data = [
     topicName: "Citizen Engagement",
     description: "Countervalent to all of the polarization of populist narratives, we wanted to control with a search for textual evidence of citizens of opposing viewpoints engaging with one another in tones of reasoned argumentation and mutual respect.",
     dataSet: {
-      borderColor: "#103b64",
+      borderColor: "#403bf4",
     }
   },
   {

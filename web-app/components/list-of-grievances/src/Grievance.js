@@ -199,7 +199,7 @@ export class Grievance extends BaseElement {
             datasets: [
               {
                 data: counts,
-                label: this.grievanceData.topicName,
+                label: `${this.grievanceData.topicName} - trend over time`,
                 borderColor: this.grievanceData.dataSet.borderColor,
                 fill: false,
               },

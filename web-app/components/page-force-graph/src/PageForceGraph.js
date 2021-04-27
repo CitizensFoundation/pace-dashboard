@@ -63,6 +63,12 @@ export class PageForceGraph extends BaseElement {
       .containerMain {
         position: relative;
       }
+
+      #3d-graph {
+        margin-left: 24px;
+        margin-right: 24px;
+
+      }
     `];
   }
 

@@ -15,7 +15,8 @@ import '@material/mwc-icon';
 export class YourGrievancesApp extends LitElement {
   static get properties() {
     return {
-      currentGrievance: { type: Object }
+      currentGrievance: { type: Object },
+      counts: { type: Object }
     };
   }
 
@@ -99,8 +100,10 @@ export class YourGrievancesApp extends LitElement {
   constructor() {
     super();
     this.page = '0';
+    this.topicCounts = {};
     this.addEventListener("open-grievance", this._openGrievance);
     this.addEventListener("close-grievance", this._closeGrievance);
+    this.addEventListener("years-and-counts", this._addYearsAndCounts);
   }
 
   _openGrievance(event) {
@@ -111,6 +114,11 @@ export class YourGrievancesApp extends LitElement {
   _closeGrievance() {
     this.currentGrievance = null;
     this.page="0";
+  }
+
+  _addYearsAndCounts(event) {
+    this.topicCounts[event.detail.topicName] = event.detail.years;
+    this.topicCounts = {...this.topicCounts};
   }
 
   render() {
@@ -157,7 +165,7 @@ export class YourGrievancesApp extends LitElement {
         `;
       case '1':
         return html`
-            <page-force-graph></page-force-graph>
+            <page-force-graph> .topicCounts=${this.topicCounts}</page-force-graph>
       `;
       case '2':
           return html`

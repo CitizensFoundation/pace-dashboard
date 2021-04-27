@@ -181,12 +181,16 @@ export class Grievance extends BaseElement {
         this.responses = responses;
         const yearLabels = [];
         const counts = [];
+        const years = {};
 
         for (let i = 0; i < responses.length; i++) {
           yearLabels.push(responses[i].key_as_string.split('-')[0]);
           const docCount = responses[i].doc_count;
+          years[responses[i].key_as_string.split('-')[0]] = docCount;
           counts.push(docCount);
         }
+
+        this.fire('years-and-counts', { topicName: this.grievanceData.topicName, years });
 
         new Chart(lineChartElement, {
           type: 'line',

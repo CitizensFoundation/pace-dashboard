@@ -85,6 +85,9 @@ class TrendsController {
             /* if (request.query.topic=="Resentment of elite") {
                 mustNot.push({"match": {"subTopic": "Climate denial" }});
              }*/
+            if (request.query.topic == "QAnon") {
+                mustNot.push({ "match": { "paragraph": "*Qanoni*" } });
+            }
             // Main
             mustNot.push({ term: { relevanceScore: 0 } });
             /*must.push({

@@ -284,8 +284,7 @@ export class PageForceGraph extends BaseElement {
           <div>Top connected: ${this.currentYear}</div>
         </div>
         <div class="descriptionBox shadow-animation shadow-elevation-3dp">
-          Connection strength is calculated by comparing all paragraphs from all found domain names.
-          Strengths are normalized and the top 2 links are displayed in this graph for each year.
+          Connection strength is calculated by comparing all paragraphs from all found domain names and the top 2 strongest links between topics are displayed in this graph for each year.
         </div>
 
         <div id="3d-graph"></div>

@@ -128,7 +128,7 @@ export class PageForceGraph extends BaseElement {
           });
           this.firstNodes = this.allGraphs[this.currentYear].nodes;
         //Graph.d3Force('link').strength(link => { return link.value });
-        this.graph.d3Force('charge').strength(-600);
+        this.graph.d3Force('charge').strength(-350);
       } else {
         debugger;
         this.graph.graphData({

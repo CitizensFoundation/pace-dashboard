@@ -132,7 +132,7 @@ const setupCounts = async (topicName) => {
         console.log(`SortLink: ${JSON.stringify(sortLink)}`);
         return sortLink.value;
       }),
-      3,
+      2,
     );
 
     console.log(topicLinks);

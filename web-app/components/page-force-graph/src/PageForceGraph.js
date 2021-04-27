@@ -264,9 +264,7 @@ export class PageForceGraph extends BaseElement {
       <div class="containerMain">
         <div class="infoBox shadow-animation shadow-elevation-3dp">
           <mwc-slider step="1" pin markers min="14" max="20" @input="${this._sliderChanged}" value="14"> </mwc-slider>
-          <div>Top connected topics: ${this.currentYear}</div>
-        </div>
-        <div class="sliderBox shadow-animation shadow-elevation-3dp">
+          <div>Top connected: ${this.currentYear}</div>
         </div>
         <div id="3d-graph"></div>
       </div>

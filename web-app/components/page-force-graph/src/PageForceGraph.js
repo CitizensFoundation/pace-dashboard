@@ -5,6 +5,8 @@ import { takeRight, sortBy } from 'lodash-es';
 import '@material/mwc-slider';
 import { ShadowStyles } from '../../your-grievances-app/src/shadow-styles';
 
+import { Data } from '../../your-grievances-app/src/data.js'
+
 //const ForceGraph3D = require('3d-force-graph');
 
 export class PageForceGraph extends BaseElement {
@@ -96,6 +98,15 @@ export class PageForceGraph extends BaseElement {
     }
   }
 
+  getTopicColor(topicName) {
+    for (let i=0;i<Data.length;i++) {
+      if (Data[i].topicName==topicName) {
+        return Data[i].dataSet.borderColor;
+        break;
+      }
+    }
+  }
+
   setGraphData() {
     if (this.allGraphs[this.currentYear]) {
       if (!this.graph) {
@@ -105,7 +116,7 @@ export class PageForceGraph extends BaseElement {
           .nodeThreeObject(node => {
             const sprite = new SpriteText(node.id);
             sprite.material.depthWrite = false; // make sprite background transparent
-            sprite.color = '#FFFFFF'; //node.color;
+            sprite.color = this.getTopicColor(node.id); //node.color;
             sprite.textHeight = 8;
             return sprite;
           });

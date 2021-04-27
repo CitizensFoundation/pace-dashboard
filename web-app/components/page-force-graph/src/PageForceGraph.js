@@ -42,7 +42,7 @@ export class PageForceGraph extends BaseElement {
   }
 
   fetchAllYears() {
-    const yearsToFetch = [2013,2014,2015,2016,2017,2018,2019,2020];
+    const yearsToFetch = [2014,2015,2016,2017,2018,2019,2020];
     for (let i=0;i<yearsToFetch.length;i++) {
       fetch(`./${yearsToFetch[i]}.json`, { credentials: 'same-origin' })
       .then(res => res.json())
@@ -77,7 +77,10 @@ export class PageForceGraph extends BaseElement {
         //Graph.d3Force('link').strength(link => { return link.value });
         this.graph.d3Force('charge').strength(-990);
       } else {
-        this.graph.graphData = {...this.allGraphs[this.currentYear]};
+        this.graph.graphData({
+          nodes: this.allGraphs[this.currentYear].nodes,
+          links: this.allGraphs[this.currentYear].links
+        })
       }
 
       setTimeout(()=>{
@@ -193,7 +196,7 @@ export class PageForceGraph extends BaseElement {
     super();
     this.title = 'Hello open-wc world!';
     this.logo = html``;
-    this.currentYear = 2013;
+    this.currentYear = 2014;
     this.allGraphs = {};
     this.fetchAllYears();
     this.graphData = {

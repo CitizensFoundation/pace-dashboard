@@ -50,7 +50,7 @@ const average = elmt => {
   return sum / elmt.length;
 };
 
-const counts = {};
+const topicCounts = {};
 
 const getAllCounts = async () => {
   const keys = Object.keys(topicLimits);
@@ -81,8 +81,8 @@ const setupCounts = async (topicName) => {
     counts.push(docCount);
   }
 
-  counts[topicName] = years;
-  console.log(years);
+  topicCounts[topicName] = years;
+  console.log(topicCounts);
 };
 
 (async function() {
@@ -100,12 +100,19 @@ const setupCounts = async (topicName) => {
       if (link.source != 'UKIP' && link.target != 'UKIP') {
         if (link.source == topic || link.target == topic) {
           //console.log(`VALUE: ${link.value}`)
+          console.log(link.source);
+          console.log(currentYear);
+
+          const sourceTopicCount = topicCounts[link.source][currentYear.toString()];
+          const targetTopicCount = topicCounts[link.target][currentYear.toString()];
+          console.log(sourceTopicCount);
+          console.log(targetTopicCount);
           if (
-            topicLimits[link.source] > TopicMinCutOff &&
-            topicLimits[link.target] > TopicMinCutOff
+            sourceTopicCount> TopicMinCutOff &&
+            targetTopicCount > TopicMinCutOff
           ) {
             //const normalizeBy = average([topicLimits[link.source], topicLimits[link.target]]);
-            const normalizeBy = Math.max(topicLimits[link.source], topicLimits[link.target]);
+            const normalizeBy = Math.max(sourceTopicCount, targetTopicCount);
             //console.log(`NormalizeBy: ${normalizeBy}`)
             const newLinkValue = (link.value / normalizeBy) * 1000000000;
             console.log(`VALUE NEW: ${newLinkValue}`);

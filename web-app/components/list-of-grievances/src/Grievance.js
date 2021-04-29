@@ -166,6 +166,33 @@ export class Grievance extends BaseElement {
     }
   }
 
+  _normalizeMap(min, max) {
+    const delta = max - min;
+    return function (val) {
+        return (val - min) / delta;
+    };
+  }
+
+  _normalizeArray(array, min, max) {
+    return array.map(this._normalizeArray(0,1))
+  }
+
+  _normalizeDocCount(year, docCount) {
+    const commonCrawlYearlyVolume = {
+      2014: 17962282340,
+      2015: 14729052874,
+      2016: 13747297828,
+      2017: 34805442487,
+      2018: 33851429206,
+      2019: 29302879071,
+      2020: 24313704452
+    }
+
+    const fraction = docCount/(commonCrawlYearlyVolume[year]/13747297828);
+
+    return fraction;
+  }
+
   firstUpdated() {
     super.firstUpdated();
     const lineChartElement = this.shadowRoot.getElementById('line-chart');
@@ -184,8 +211,9 @@ export class Grievance extends BaseElement {
         const years = {};
 
         for (let i = 0; i < responses.length; i++) {
-          yearLabels.push(responses[i].key_as_string.split('-')[0]);
-          const docCount = responses[i].doc_count;
+          const yearLabel = responses[i].key_as_string.split('-')[0];
+          yearLabels.push(yearLabel);
+          const docCount = this._normalizeDocCount(parseInt(yearLabel), responses[i].doc_count);
           years[responses[i].key_as_string.split('-')[0]] = docCount;
           counts.push(docCount);
         }
@@ -209,6 +237,7 @@ export class Grievance extends BaseElement {
             tooltips:{
               enabled:false
             },
+            scaleShowLabels: false,
             title: {
               display: false,
               text: 'Trends',

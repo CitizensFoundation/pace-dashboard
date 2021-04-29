@@ -37,7 +37,7 @@ class TrendsController {
                 _source: { excludes: [] },
                 query: {
                     bool: {
-                        must: [{ term: { oneTwoRelevanceScoreV3: 1 } }],
+                        must: [{ term: { oneTwoRelevanceScoreV2: 1 } }],
                         filter: [
                             { match_all: {} },
                             { match_phrase: { topic: request.query.topic } },

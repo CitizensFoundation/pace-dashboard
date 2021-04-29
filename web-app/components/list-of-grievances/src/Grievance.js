@@ -234,24 +234,22 @@ export class Grievance extends BaseElement {
             ],
           },
           options: {
-            tooltips:{
-              enabled:false
-            },
-            scaleShowLabels: false,
-            title: {
-              display: false,
-              text: 'Trends',
+            plugins: {
+              tooltip: {
+                  enabled: false,
+              }
             },
             scales: {
-              yAxes: [
-                {
-                  ticks: {
-                    display: false, //this will remove the label/text
-                  },
-                },
-              ],
-            },
-          },
+                y: {
+                    ticks: {
+                        // Include a dollar sign in the ticks
+                        callback: function(value, index, values) {
+                            return "";
+                        }
+                    }
+                }
+            }
+          }
         });
       });
 

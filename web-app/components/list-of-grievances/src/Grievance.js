@@ -177,6 +177,7 @@ export class Grievance extends BaseElement {
     return array.map(this._normalizeArray(0,1))
   }
 
+  // The cummulative new content for each year in bytes
   _normalizeDocCount(year, docCount) {
     const commonCrawlYearlyVolume = {
       2014: 17962282340,

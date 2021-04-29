@@ -57,6 +57,10 @@ export class ListOfGrievances extends BaseElement {
         a {
           color: rgba(0, 0, 0, 0.54);
         }
+
+        .readMore {
+          color: #555;
+        }
       `,
     ];
   }
@@ -77,23 +81,18 @@ export class ListOfGrievances extends BaseElement {
           <div class="content">
             <h2 class="mdc-typography--title contentTitle">Introduction to the PaCE Dashboard</h2>
             <div class="mdc-typography--body1 subtext contentText">
-              <p>Here you see relative trends between different topics connected to populism, nativism
-              and civic engagement. We use
-              <a href="https://commoncrawl.org/" target="_blank">CommonCrawl</a>, where we search
-              for keywords in full web crawls from every year from 2013 for hundreds of keywords
-              that are then filtered through BERT based AI algorithms that have been trained to
-              recognize the different topics.</p>
+              <p>The PaCE Dashboard allows us to reveal relative trends between different topics driving the discourse regarding populism, nativism and civic engagement. We use CommonCrawl, granting us the ability to scan web crawls from every year,  2013 to the present. We developed search criteria, testing then targeting hundreds of keywords; those
+                keywords then got filtered through AI algorithms which we trained to recognize the different narrative topics.</p>
               <p>
-              There is
               <a
-                targer="_blank"
+                targer="_blank" class="readMore"
                 href="https://docs.google.com/document/d/1-C6GJAy3GCl7nO_HUyaKKk07x5ydMAMMLMGESwIdtpk"
-                >more detailed information here.</a
+                >Read more about the project here</a
               >
               </p>
               <p>The PaCE Dashboard is a part of the Horizon 2020 funded
               <a href="https://popandce.eu/" target="_blank"
-                >Populism and Civic Engagement project.</a
+                >Populism and Civic Engagement project</a
               ></p>
             </div>
           </div>

@@ -37,7 +37,11 @@ class TrendsController {
                 _source: { excludes: [] },
                 query: {
                     bool: {
-                        must: [{ term: { oneTwoRelevanceScoreV2: 1 } }],
+                        must: [
+                            { term: { oneTwoRelevanceScoreV3: 1 } },
+                            { term: { oneTwoRelevanceScoreV2: 1 } },
+                            { term: { oneTwoRelevanceScore: 1 } }
+                        ],
                         filter: [
                             { match_all: {} },
                             { match_phrase: { topic: request.query.topic } },
@@ -77,8 +81,8 @@ class TrendsController {
             const must = [];
             const mustNot = [];
             must.push({ term: { oneTwoRelevanceScoreV3: 1 } });
-            //    must.push({ term: { oneTwoRelevanceScoreV2: 1 } });
-            //    must.push({ term: { oneTwoRelevanceScore: 1 } });
+            must.push({ term: { oneTwoRelevanceScoreV2: 1 } });
+            must.push({ term: { oneTwoRelevanceScore: 1 } });
             if (request.query.topic == "Left behind") {
                 //must.push({"match": {"paragraph": ".*eft behind.*" }});
                 //must.push({"match": {"paragraph": ".*global.*" }});

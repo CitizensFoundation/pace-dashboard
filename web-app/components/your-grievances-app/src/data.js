@@ -35,19 +35,6 @@ export const Data = [
     }
   },
   {
-    currrentCount: createRandomData(DataLabels.length)[0],
-    title: "Disintegration of Traditional Family Unit",
-    topicName: "Family disintegration",
-    description: "Declining rates of marriage, rising divorce rates, stagnant wages requiring both parents to work full time, growth of childcare as an employment sector -- all add up to anxiety and sense of loss for those who believe in traditional family unit as building block of society.",
-    quote: "Despite its widespread social acceptance of single mothers, children who grow up without fathers suffer a host of social, emotional and psychological problems: crime, drugs, promiscuity, teen pregnancy, suicide, and dropouts. That’s not to say single mothers aren’t doing their best; it’s merely to say there’s only so much they can do.",
-    dataSet: {
-      data: createRandomData(DataLabels.length),
-      label: "Family Disintegration",
-      borderColor: "#8e5ea2",
-      fill: false
-    }
-  },
-  {
     title: "Restrictions on Populist “Free Speech”",
     topicName: "Restrictions on free speech",
     description: "Free speech forms a cornerstone of tolerant, democratic society; as such only intolerant, illiberal, anti-democratic speech represents a threat. Restrictions on populist messages that fit these criteria outraged the populist base, and turned free speech and “cancel culture” into a battleground.",
@@ -130,6 +117,19 @@ export const Data = [
       data: createRandomData(DataLabels.length),
       label: "Resentment of Elites",
       borderColor: "#ba3c9f",
+      fill: false
+    }
+  },
+  {
+    currrentCount: createRandomData(DataLabels.length)[0],
+    title: "Disintegration of Traditional Family Unit",
+    topicName: "Family disintegration",
+    description: "Declining rates of marriage, rising divorce rates, stagnant wages requiring both parents to work full time, growth of childcare as an employment sector -- all add up to anxiety and sense of loss for those who believe in traditional family unit as building block of society.",
+    quote: "Despite its widespread social acceptance of single mothers, children who grow up without fathers suffer a host of social, emotional and psychological problems: crime, drugs, promiscuity, teen pregnancy, suicide, and dropouts. That’s not to say single mothers aren’t doing their best; it’s merely to say there’s only so much they can do.",
+    dataSet: {
+      data: createRandomData(DataLabels.length),
+      label: "Family Disintegration",
+      borderColor: "#8e5ea2",
       fill: false
     }
   },
